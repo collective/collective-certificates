@@ -1,0 +1,46 @@
+version: 2
+updates:
+
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      # Check for updates to GitHub Actions every week
+      interval: "weekly"
+    cooldown:
+      default-days: 7
+    # Setting labels replaces Dependabot's defaults, so keep them.
+    # Dependabot never writes news fragments, so "skip changelog" exempts its
+    # pull requests from the check in .github/workflows/changelog.yml.
+    # Every label must exist in the repository, otherwise it is not applied.
+    labels:
+      - "dependencies"
+      - "github_actions"
+      - "skip changelog"
+
+  # The documentation toolchain: docs/pyproject.toml and docs/uv.lock.
+  - package-ecosystem: "uv"
+    directory: "/docs"
+    schedule:
+      interval: "weekly"
+    cooldown:
+      default-days: 7
+    labels:
+      - "dependencies"
+      - "python"
+      - "skip changelog"
+    # One pull request for the lot: the lockfile moves as a whole.
+    groups:
+      docs:
+        patterns:
+          - "*"
+
+  # Not covered, on purpose:
+  #
+  # - The backend is an add-on. Its dependencies in backend/pyproject.toml are
+  #   ranges resolved against the Plone constraints at install time, and there
+  #   is no lockfile to update.
+  # - The frontend is a pnpm workspace that includes the Volto checkout in
+  #   frontend/core/, which `make install` fetches and git ignores. Without it,
+  #   pnpm cannot resolve the `workspace:*` dependencies on Volto's packages,
+  #   and every npm update job fails. Volto itself is pinned in
+  #   frontend/mrs.developer.json and upgraded by hand.

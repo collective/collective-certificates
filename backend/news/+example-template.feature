@@ -1,0 +1,1 @@
+Added a configured certificate template, Starfleet Academy Certificate, to the example content profile: a Plone-branded background, a signature as an Image inside it, a design with the participant's name, the event, its dates and hours, the signer and the verification QR code, and sample data to preview it. @ericof

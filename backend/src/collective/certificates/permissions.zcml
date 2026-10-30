@@ -1,0 +1,15 @@
+<configure xmlns="http://namespaces.zope.org/zope">
+
+  <!-- No role has these by default: the install profile's rolemap.xml
+       clears them, and the example content profile grants them to Manager. -->
+  <permission
+      id="collective.certificates.AddCertificateTemplate"
+      title="collective.certificates: Add CertificateTemplate"
+      />
+
+  <permission
+      id="collective.certificates.AddCertificate"
+      title="collective.certificates: Add Certificate"
+      />
+
+</configure>

@@ -1,0 +1,58 @@
+[project]
+name = "collective-certificates-documentation"
+description = "Generate and store participation certificates for events."
+keywords = [
+    "Attendance Certificates for Plone",
+    "documentation",
+    "Plone",
+    "Diátaxis",
+]
+version = "1.0.0"
+readme = "README.md"
+requires-python = ">=3.12"
+maintainers = [
+    { name = "Érico Andrei", email = "ericof@plone.org" },
+]
+authors = [
+    { name = "Érico Andrei", email = "ericof@plone.org" },
+]
+classifiers = [
+    "Operating System :: OS Independent",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14",
+]
+
+[dependency-groups]
+dev = [
+    "graphviz",
+    "linkify-it-py",
+    "myst-parser",
+    "plone-sphinx-theme>=1.4.1",  # Use the latest stable version or a minimum
+    "setuptools",  # required by sphinxcontrib.httpexample, remove when it migrates to importlib. See https://github.com/collective/sphinxcontrib-httpexample/issues/106
+    "sphinx-autobuild",
+    "sphinx-copybutton",
+    "sphinx-design",
+    "sphinx-examples",
+    "sphinx-notfound-page",
+    "sphinx-reredirects",
+    "sphinx-sitemap",
+    "sphinx-tippy",
+    "sphinxcontrib-httpdomain",
+    "sphinxcontrib-httpexample",
+    "sphinxcontrib-mermaid",
+    "sphinxcontrib-video",
+    "sphinxcontrib-youtube",
+    "sphinxext-opengraph",
+    "vale",
+]
+
+[project.urls]
+Repository = "https://github.com/collective/collective-certificates"
+Documentation = "https://collective.github.io/collective-certificates/"
+
+[tool.uv]
+# The documentation is not a package: `uv sync` installs the tools only.
+package = false

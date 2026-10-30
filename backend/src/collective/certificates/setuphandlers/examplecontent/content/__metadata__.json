@@ -1,0 +1,60 @@
+{
+  "__version__": "1.0.0",
+  "_blob_files_": [
+    "a58ccead718140c1baa98d43595fc3e6/image/plone-foundation.png",
+    "91eb003156424878a0d93b5742461db6/background/certificate.png",
+    "a5aa5336a75e452b96d8c82b5c20463e/image/signature.png"
+  ],
+  "_data_files_": [
+    "plone_site_root/data.json",
+    "a720393b3c0240e5bd27c43fcd2cfd1e/data.json",
+    "a58ccead718140c1baa98d43595fc3e6/data.json",
+    "91eb003156424878a0d93b5742461db6/data.json",
+    "a5aa5336a75e452b96d8c82b5c20463e/data.json"
+  ],
+  "default_page": {},
+  "local_roles": {
+    "a58ccead718140c1baa98d43595fc3e6": {
+      "local_roles": {
+        "admin": [
+          "Owner"
+        ]
+      }
+    },
+    "a720393b3c0240e5bd27c43fcd2cfd1e": {
+      "local_roles": {
+        "admin": [
+          "Owner"
+        ]
+      }
+    },
+    "plone_site_root": {
+      "local_roles": {
+        "admin": [
+          "Owner"
+        ]
+      }
+    },
+    "91eb003156424878a0d93b5742461db6": {
+      "local_roles": {
+        "admin": [
+          "Owner"
+        ]
+      }
+    },
+    "a5aa5336a75e452b96d8c82b5c20463e": {
+      "local_roles": {
+        "admin": [
+          "Owner"
+        ]
+      }
+    }
+  },
+  "ordering": {
+    "a58ccead718140c1baa98d43595fc3e6": 0,
+    "a720393b3c0240e5bd27c43fcd2cfd1e": 42,
+    "91eb003156424878a0d93b5742461db6": 43,
+    "a5aa5336a75e452b96d8c82b5c20463e": 0
+  },
+  "relations": []
+}

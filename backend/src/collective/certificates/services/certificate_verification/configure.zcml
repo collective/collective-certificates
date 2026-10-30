@@ -1,0 +1,16 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:plone="http://namespaces.plone.org/plone"
+    >
+
+  <!-- Public: the certificate's UID is the credential. -->
+  <plone:service
+      method="GET"
+      factory=".get.VerificationGet"
+      for="plone.base.interfaces.siteroot.IPloneSiteRoot"
+      permission="zope2.View"
+      layer="collective.certificates.interfaces.IBrowserLayer"
+      name="@certificate-verification"
+      />
+
+</configure>

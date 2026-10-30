@@ -1,0 +1,60 @@
+.certificate-template-view {
+  .certificate-template-figure {
+    margin: 0 0 2rem;
+
+    figcaption {
+      color: #5c6370;
+      font-size: 0.9em;
+    }
+  }
+
+  .certificate-template-csv {
+    margin: 0 0 2rem;
+  }
+
+  .certificate-template-csv-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .certificate-template-csv-status {
+    margin-top: 1rem;
+
+    ul {
+      padding-left: 1.25rem;
+    }
+  }
+
+  .csv-errors {
+    color: #b00020;
+  }
+
+  .certificate-template-images ul {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 0;
+    gap: 1rem;
+    list-style: none;
+  }
+
+  .certificate-template-images li {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+
+    a {
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+    }
+
+    img {
+      max-width: 8rem;
+      max-height: 8rem;
+      border: 1px solid #d0d4da;
+      object-fit: contain;
+    }
+  }
+}

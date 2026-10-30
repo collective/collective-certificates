@@ -1,0 +1,219 @@
+[project]
+name = "collective.certificates"
+dynamic = ["version"]
+description = "Generate and store participation certificates for events."
+readme = "README.md"
+license = "GPL-2.0-only"
+requires-python = ">=3.11"
+authors = [
+    { name = "Érico Andrei", email = "ericof@plone.org" },
+]
+keywords = [
+    "CMS",
+    "Plone",
+    "Python",
+]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Environment :: Web Environment",
+    "Framework :: Plone",
+    "Framework :: Plone :: 6.1",
+    "Framework :: Plone :: 6.2",
+    "Framework :: Plone :: Addon",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14",
+]
+dependencies = [
+    "Products.CMFPlone",
+    "fonttools",
+    "jsonschema",
+    "Pillow",
+    "plone.api",
+    "plone.restapi",
+    "plone.schema",
+    "plone.volto",
+    "resvg-py>=0.5.0",
+    "segno",
+]
+
+[project.optional-dependencies]
+test = [
+    "horse-with-no-namespace",
+    "plone.app.testing",
+    "plone.restapi[test]",
+    "pytest",
+    "pytest-cov",
+    "pytest-plone>=1.0.0a2",
+]
+
+[project.urls]
+Homepage = "https://github.com/collective/collective-certificates"
+PyPI = "https://pypi.org/project/collective.certificates"
+Source = "https://github.com/collective/collective-certificates"
+Tracker = "https://github.com/collective/collective-certificates/issues"
+
+
+[project.entry-points."plone.autoinclude.plugin"]
+target = "plone"
+
+[tool.uv]
+managed = false
+
+[tool.hatch.version]
+path = "src/collective/certificates/__init__.py"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build]
+strict-naming = true
+
+[tool.hatch.build.targets.sdist]
+exclude = [
+  "/.github",
+]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/collective"]
+
+[tool.towncrier]
+directory = "news/"
+filename = "CHANGELOG.md"
+start_string = "<!-- towncrier release notes start -->\n"
+title_format = "## {version} ({project_date})"
+template = "news/.changelog_template.jinja"
+issue_format = "[#{issue}](https://github.com/collective/collective-certificates/issues/{issue})"
+underlines = ["", "", ""]
+
+[[tool.towncrier.type]]
+directory = "breaking"
+name = "Breaking"
+showcontent = true
+
+[[tool.towncrier.type]]
+directory = "feature"
+name = "Feature"
+showcontent = true
+
+[[tool.towncrier.type]]
+directory = "bugfix"
+name = "Bugfix"
+showcontent = true
+
+[[tool.towncrier.type]]
+directory = "internal"
+name = "Internal"
+showcontent = true
+
+[[tool.towncrier.type]]
+directory = "documentation"
+name = "Documentation"
+showcontent = true
+
+[[tool.towncrier.type]]
+directory = "tests"
+name = "Tests"
+showcontent = true
+
+[tool.ruff]
+target-version = "py311"
+line-length = 88
+fix = true
+lint.select = [
+    # flake8-2020
+    "YTT",
+    # flake8-annotations: every signature is annotated
+    "ANN",
+    # flake8-bandit
+    "S",
+    # flake8-bugbear
+    "B",
+    # flake8-builtins
+    "A",
+    # flake8-comprehensions
+    "C4",
+    # flake8-debugger
+    "T10",
+    # flake8-simplify
+    "SIM",
+    # mccabe
+    "C90",
+    # pycodestyle
+    "E", "W",
+    # pyflakes
+    "F",
+    # pygrep-hooks
+    "PGH",
+    # pyupgrade
+    "UP",
+    # ruff
+    "RUF",
+]
+lint.ignore = [
+    # DoNotAssignLambda
+    "E731",
+    # ``typing.Any`` is the honest type for JSON values and Zope arguments
+    "ANN401",
+]
+
+[tool.ruff.lint.isort]
+case-sensitive = false
+no-sections = true
+force-single-line = true
+from-first = true
+lines-after-imports = 2
+lines-between-types = 1
+order-by-type = false
+
+[tool.ruff.format]
+preview = true
+
+[tool.ruff.lint.per-file-ignores]
+# ANN: tests annotate parameters where it helps, not every fixture and
+# test return.
+"tests/*" = ["ANN", "E501", "RUF001", "S101"]
+# S106: ``token`` names a field or a date format, not a credential.
+"src/collective/certificates/blueprint/fields.py" = ["S106"]
+"src/collective/certificates/blueprint/dateformats.py" = ["S106"]
+# A002: ``format`` is the documented keyword of create_certificate().
+"src/collective/certificates/api/__init__.py" = ["A002"]
+"src/collective/certificates/api/batch.py" = ["A002"]
+
+[tool.check-manifest]
+ignore = [
+    ".editorconfig",
+    ".flake8",
+    "dependabot.yml",
+    "mx.ini",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.coverage.run]
+source_pkgs = ["collective.certificates", "tests"]
+branch = true
+parallel = true
+omit = [
+  "src/collective/certificates/locales/*.py",
+]
+
+# Branch coverage, enforced. Every pragma needs a same-line reason, which
+# ``make check-pragmas`` checks.
+[tool.coverage.report]
+fail_under = 100
+show_missing = true
+skip_covered = true
+
+[tool.mypy]
+python_version = "3.11"
+disallow_untyped_defs = true
+ignore_missing_imports = true
+namespace_packages = true
+explicit_package_bases = true
+mypy_path = "src"

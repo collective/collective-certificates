@@ -1,0 +1,26 @@
+{
+  "version": 1,
+  "page": {"width": 3508, "height": 2480},
+  "elements": [
+    {"id": "certify", "type": "text", "x": 190, "y": 720, "anchor": "start", "baseline": "alphabetic",
+     "font": "inter", "size": 64, "color": "#1b1b1b", "content": "This certifies that"},
+    {"id": "name", "type": "text", "x": 190, "y": 900, "anchor": "start", "baseline": "alphabetic",
+     "font": "inter-bold", "size": 120, "color": "#1f547a", "content": "{{ full_name }}",
+     "max_width": 2200, "fit": "shrink"},
+    {"id": "attended", "type": "text", "x": 190, "y": 1060, "anchor": "start", "baseline": "alphabetic",
+     "font": "inter", "size": 64, "color": "#1b1b1b", "content": "attended and completed the course"},
+    {"id": "event", "type": "text", "x": 190, "y": 1230, "anchor": "start", "baseline": "alphabetic",
+     "font": "eb-garamond-bold", "size": 110, "color": "#1b1b1b", "content": "{{ event_name }}",
+     "max_width": 2200, "fit": "shrink"},
+    {"id": "period", "type": "text", "x": 190, "y": 1400, "anchor": "start", "baseline": "alphabetic",
+     "font": "inter", "size": 52, "color": "#1b1b1b",
+     "content": "from {{ event_start_date|date }} to {{ event_end_date|date }}, a total of {{ total_hours }} hours."},
+    {"id": "signature", "type": "image", "x": 190, "y": 1720, "width": 900, "height": 220, "asset": "signature"},
+    {"id": "signer", "type": "text", "x": 190, "y": 2040, "anchor": "start", "baseline": "alphabetic",
+     "font": "inter-bold", "size": 44, "color": "#1b1b1b", "content": "{{ responsible_person }}"},
+    {"id": "role", "type": "text", "x": 190, "y": 2110, "anchor": "start", "baseline": "alphabetic",
+     "font": "inter", "size": 36, "color": "#1b1b1b", "content": "Course director"},
+    {"id": "qr", "type": "qrcode", "x": 2920, "y": 1780, "size": 400,
+     "content": "{{ verification_url }}", "ec": "M", "fg": "#1b1b1b", "bg": "#ffffff"}
+  ]
+}

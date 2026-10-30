@@ -1,0 +1,171 @@
+{
+  "@id": "/starfleet-academy-certificate",
+  "@type": "CertificateTemplate",
+  "UID": "91eb003156424878a0d93b5742461db6",
+  "allow_discussion": null,
+  "background": {
+    "blob_path": "91eb003156424878a0d93b5742461db6/background/certificate.png",
+    "content-type": "image/png",
+    "filename": "certificate.png",
+    "height": 1652,
+    "size": 105160,
+    "width": 2338
+  },
+  "blueprint": {
+    "elements": [
+      {
+        "anchor": "start",
+        "baseline": "alphabetic",
+        "color": "#1b1b1b",
+        "content": "This certifies that",
+        "font": "inter",
+        "id": "certify",
+        "size": 40,
+        "type": "text",
+        "x": 124,
+        "y": 520
+      },
+      {
+        "anchor": "start",
+        "baseline": "alphabetic",
+        "color": "#0083be",
+        "content": "{{ full_name }}",
+        "fit": "shrink",
+        "font": "inter-bold",
+        "id": "name",
+        "max_width": 1200,
+        "size": 80,
+        "type": "text",
+        "x": 124,
+        "y": 630
+      },
+      {
+        "anchor": "start",
+        "baseline": "alphabetic",
+        "color": "#1b1b1b",
+        "content": "attended and completed the course",
+        "font": "inter",
+        "id": "attended",
+        "size": 40,
+        "type": "text",
+        "x": 124,
+        "y": 720
+      },
+      {
+        "anchor": "start",
+        "baseline": "alphabetic",
+        "color": "#1b1b1b",
+        "content": "{{ event_name }}",
+        "fit": "shrink",
+        "font": "eb-garamond-bold",
+        "id": "event",
+        "max_width": 1200,
+        "size": 72,
+        "type": "text",
+        "x": 124,
+        "y": 825
+      },
+      {
+        "anchor": "start",
+        "baseline": "alphabetic",
+        "color": "#1b1b1b",
+        "content": "from {{ event_start_date|date }} to {{ event_end_date|date }}, a total of {{ total_hours }} hours.",
+        "font": "inter",
+        "id": "period",
+        "size": 32,
+        "type": "text",
+        "x": 124,
+        "y": 905
+      },
+      {
+        "asset": "signature",
+        "height": 120,
+        "id": "signature",
+        "type": "image",
+        "width": 480,
+        "x": 124,
+        "y": 1010
+      },
+      {
+        "anchor": "start",
+        "baseline": "alphabetic",
+        "color": "#1b1b1b",
+        "content": "{{ responsible_person }}",
+        "font": "inter-bold",
+        "id": "signer",
+        "size": 30,
+        "type": "text",
+        "x": 124,
+        "y": 1185
+      },
+      {
+        "anchor": "start",
+        "baseline": "alphabetic",
+        "color": "#1b1b1b",
+        "content": "Course director",
+        "font": "inter",
+        "id": "role",
+        "size": 24,
+        "type": "text",
+        "x": 124,
+        "y": 1228
+      },
+      {
+        "bg": "#ffffff",
+        "content": "{{ verification_url }}",
+        "ec": "M",
+        "fg": "#1b1b1b",
+        "id": "qr",
+        "size": 240,
+        "type": "qrcode",
+        "x": 1060,
+        "y": 990
+      }
+    ],
+    "page": {
+      "height": 1652,
+      "width": 2338
+    },
+    "version": 1
+  },
+  "created": "2026-10-30T00:43:32+00:00",
+  "creators": [
+    "admin"
+  ],
+  "date_format": "long",
+  "description": "Certificate of attendance for a Starfleet Academy course.",
+  "exclude_from_nav": false,
+  "exportimport.constrains": {},
+  "exportimport.conversation": [],
+  "id": "starfleet-academy-certificate",
+  "is_folderish": true,
+  "language": "##DEFAULT##",
+  "layout": "view",
+  "lock": {},
+  "modified": "2026-10-30T00:43:32+00:00",
+  "review_state": "private",
+  "sample_data": {
+    "event_end_date": "2026-06-09",
+    "event_name": "Star Trek: Picard",
+    "event_start_date": "2026-05-26",
+    "full_name": "Patrick Stewart",
+    "responsible_person": "Jean-Luc Picard",
+    "total_hours": "47"
+  },
+  "title": "Starfleet Academy Certificate",
+  "type_title": "Certificate Template",
+  "version": "current",
+  "workflow_history": {
+    "simple_publication_workflow": [
+      {
+        "action": null,
+        "actor": "admin",
+        "comments": "",
+        "review_state": "private",
+        "time": "2026-10-30T00:43:32+00:00"
+      }
+    ]
+  },
+  "working_copy": null,
+  "working_copy_of": null
+}

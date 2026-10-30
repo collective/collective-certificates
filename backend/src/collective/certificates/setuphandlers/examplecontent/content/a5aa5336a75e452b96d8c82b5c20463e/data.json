@@ -1,0 +1,40 @@
+{
+  "@id": "/starfleet-academy-certificate/signature",
+  "@type": "Image",
+  "UID": "a5aa5336a75e452b96d8c82b5c20463e",
+  "allow_discussion": null,
+  "contributors": [],
+  "created": "2026-10-30T00:43:32+00:00",
+  "creators": [
+    "admin"
+  ],
+  "description": "",
+  "effective": null,
+  "exclude_from_nav": false,
+  "expires": null,
+  "exportimport.constrains": {},
+  "exportimport.conversation": [],
+  "id": "signature",
+  "image": {
+    "blob_path": "a5aa5336a75e452b96d8c82b5c20463e/image/signature.png",
+    "content-type": "image/png",
+    "filename": "signature.png",
+    "height": 220,
+    "size": 4150,
+    "width": 900
+  },
+  "is_folderish": false,
+  "language": "##DEFAULT##",
+  "layout": "image_view",
+  "lock": {},
+  "modified": "2026-10-30T00:43:32+00:00",
+  "review_state": null,
+  "rights": "",
+  "subjects": [],
+  "title": "Signature",
+  "type_title": "Image",
+  "version": "current",
+  "workflow_history": {},
+  "working_copy": null,
+  "working_copy_of": null
+}

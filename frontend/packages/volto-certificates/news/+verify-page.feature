@@ -1,0 +1,1 @@
+Added the certificate verification page at `/verify/<uid>`, the address printed on each certificate: it shows whether the certificate is valid, its title, issue date and values, and a link to download it. The designer and the template view now read the template's date format from its token. @ericof

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rolemap>
+  <permissions>
+    <!-- No role can add templates or certificates until a site grants it. -->
+    <permission acquire="False"
+                name="collective.certificates: Add CertificateTemplate"
+    />
+    <permission acquire="False"
+                name="collective.certificates: Add Certificate"
+    />
+  </permissions>
+</rolemap>

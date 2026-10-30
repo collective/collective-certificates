@@ -1,0 +1,507 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language: en\n"
+"Language-Team: \n"
+"Content-Type: \n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. Default: "Add image"
+#: messages
+msgid "certificates.addImage"
+msgstr ""
+
+#. Default: "To show a signature or a logo, add it as an image inside this template."
+#: messages
+msgid "certificates.addImagesHint"
+msgstr ""
+
+#. Default: "Add QR code"
+#: messages
+msgid "certificates.addQr"
+msgstr ""
+
+#. Default: "Add text"
+#: messages
+msgid "certificates.addText"
+msgstr ""
+
+#. Default: "Alignment"
+#: messages
+msgid "certificates.anchor"
+msgstr ""
+
+#. Default: "End"
+#: messages
+msgid "certificates.anchorEnd"
+msgstr ""
+
+#. Default: "Center"
+#: messages
+msgid "certificates.anchorMiddle"
+msgstr ""
+
+#. Default: "Start"
+#: messages
+msgid "certificates.anchorStart"
+msgstr ""
+
+#. Default: "Apply"
+#: messages
+msgid "certificates.apply"
+msgstr ""
+
+#. Default: "Checking…"
+#: messages
+msgid "certificates.applying"
+msgstr ""
+
+#. Default: "{title} (formatted date)"
+#: messages
+msgid "certificates.asDate"
+msgstr ""
+
+#. Default: "Image"
+#: messages
+msgid "certificates.asset"
+msgstr ""
+
+#. Default: "Background"
+#: messages
+msgid "certificates.assetBackground"
+msgstr ""
+
+#. Default: "{asset} (missing)"
+#: messages
+msgid "certificates.assetMissing"
+msgstr ""
+
+#. Default: "Background"
+#: messages
+msgid "certificates.background"
+msgstr ""
+
+#. Default: "Vertical position"
+#: messages
+msgid "certificates.baseline"
+msgstr ""
+
+#. Default: "On the baseline"
+#: messages
+msgid "certificates.baselineAlphabetic"
+msgstr ""
+
+#. Default: "Hanging"
+#: messages
+msgid "certificates.baselineHanging"
+msgstr ""
+
+#. Default: "Centered"
+#: messages
+msgid "certificates.baselineMiddle"
+msgstr ""
+
+#. Default: "Cancel"
+#: messages
+msgid "certificates.cancel"
+msgstr ""
+
+#. Default: "{count, plural, one {# certificate was created.} other {# certificates were created.}}"
+#: messages
+msgid "certificates.certificatesCreated"
+msgstr ""
+
+#. Default: "Color"
+#: messages
+msgid "certificates.color"
+msgstr ""
+
+#. Default: "Use a color like #1a2b3c."
+#: messages
+msgid "certificates.colorInvalid"
+msgstr ""
+
+#. Default: "Discard the changes made in the designer?"
+#: messages
+msgid "certificates.confirmDiscard"
+msgstr ""
+
+#. Default: "Content"
+#: messages
+msgid "certificates.content"
+msgstr ""
+
+#. Default: "The certificates could not be created. Try again."
+#: messages
+msgid "certificates.createFailed"
+msgstr ""
+
+#. Default: "Create certificates from CSV"
+#: messages
+msgid "certificates.createFromCsv"
+msgstr ""
+
+#. Default: "Creating certificates…"
+#: messages
+msgid "certificates.creatingCertificates"
+msgstr ""
+
+#. Default: "The CSV template could not be downloaded."
+#: messages
+msgid "certificates.csvDownloadFailed"
+msgstr ""
+
+#. Default: "Line {row}, {column}: {message}"
+#: messages
+msgid "certificates.csvErrorAt"
+msgstr ""
+
+#. Default: "Line {row}: {message}"
+#: messages
+msgid "certificates.csvErrorLine"
+msgstr ""
+
+#. Default: "Delete"
+#: messages
+msgid "certificates.delete"
+msgstr ""
+
+#. Default: "Certificate designer"
+#: messages
+msgid "certificates.designer"
+msgstr ""
+
+#. Default: "Download CSV template"
+#: messages
+msgid "certificates.downloadCsvTemplate"
+msgstr ""
+
+#. Default: "Duplicate"
+#: messages
+msgid "certificates.duplicate"
+msgstr ""
+
+#. Default: "Elements"
+#: messages
+msgid "certificates.elements"
+msgstr ""
+
+#. Default: "{count, plural, =0 {No elements} one {# element} other {# elements}}"
+#: messages
+msgid "certificates.elementsCount"
+msgstr ""
+
+#. Default: "Error correction"
+#: messages
+msgid "certificates.errorCorrection"
+msgstr ""
+
+#. Default: "{element}: the date filter needs a date field, not {token}."
+#: messages
+msgid "certificates.error_date_filter"
+msgstr ""
+
+#. Default: "{element}: another element has the same id."
+#: messages
+msgid "certificates.error_duplicate_id"
+msgstr ""
+
+#. Default: "{element}: the {asset} image is empty."
+#: messages
+msgid "certificates.error_missing_asset"
+msgstr ""
+
+#. Default: "{element}: the element does not fit on the page."
+#: messages
+msgid "certificates.error_outside_page"
+msgstr ""
+
+#. Default: "The page is {page_width}x{page_height} but the background is {width}x{height}."
+#: messages
+msgid "certificates.error_page_size"
+msgstr ""
+
+#. Default: "{element}: {detail}"
+#: messages
+msgid "certificates.error_placeholder_syntax"
+msgstr ""
+
+#. Default: "Invalid value at {path}: {detail}"
+#: messages
+msgid "certificates.error_schema"
+msgstr ""
+
+#. Default: "{element}: unknown filter {filter}."
+#: messages
+msgid "certificates.error_unknown_filter"
+msgstr ""
+
+#. Default: "{element}: unknown font {font}."
+#: messages
+msgid "certificates.error_unknown_font"
+msgstr ""
+
+#. Default: "{element}: unknown field {token}."
+#: messages
+msgid "certificates.error_unknown_token"
+msgstr ""
+
+#. Default: "Fit template to background"
+#: messages
+msgid "certificates.fitPage"
+msgstr ""
+
+#. Default: "Font"
+#: messages
+msgid "certificates.font"
+msgstr ""
+
+#. Default: "Foreground"
+#: messages
+msgid "certificates.foreground"
+msgstr ""
+
+#. Default: "Height"
+#: messages
+msgid "certificates.height"
+msgstr ""
+
+#. Default: "Identifier"
+#: messages
+msgid "certificates.id"
+msgstr ""
+
+#. Default: "Use a lowercase letter, then up to 31 lowercase letters, digits, - or _."
+#: messages
+msgid "certificates.idInvalid"
+msgstr ""
+
+#. Default: "Another element has this identifier."
+#: messages
+msgid "certificates.idTaken"
+msgstr ""
+
+#. Default: "Insert"
+#: messages
+msgid "certificates.insert"
+msgstr ""
+
+#. Default: "Insert field"
+#: messages
+msgid "certificates.insertField"
+msgstr ""
+
+#. Default: "Keep proportions"
+#: messages
+msgid "certificates.lockRatio"
+msgstr ""
+
+#. Default: "Maximum width"
+#: messages
+msgid "certificates.maxWidth"
+msgstr ""
+
+#. Default: "Move {id} back"
+#: messages
+msgid "certificates.moveBack"
+msgstr ""
+
+#. Default: "Move {id} forward"
+#: messages
+msgid "certificates.moveForward"
+msgstr ""
+
+#. Default: "No certificates were created."
+#: messages
+msgid "certificates.noCertificatesCreated"
+msgstr ""
+
+#. Default: "This template has no design yet."
+#: messages
+msgid "certificates.noDesign"
+msgstr ""
+
+#. Default: "No elements yet. Add one from the toolbar."
+#: messages
+msgid "certificates.noElements"
+msgstr ""
+
+#. Default: "The preview cannot be drawn: {detail}"
+#: messages
+msgid "certificates.noPreview"
+msgstr ""
+
+#. Default: "Nothing selected"
+#: messages
+msgid "certificates.nothingSelected"
+msgstr ""
+
+#. Default: "Open designer"
+#: messages
+msgid "certificates.openDesigner"
+msgstr ""
+
+#. Default: "The page is {pageWidth}×{pageHeight} but the background is {width}×{height}."
+#: messages
+msgid "certificates.pageMismatch"
+msgstr ""
+
+#. Default: "The certificate drawn with the sample data."
+#: messages
+msgid "certificates.previewWithSampleData"
+msgstr ""
+
+#. Default: "{count, plural, one {# problem} other {# problems}}"
+#: messages
+msgid "certificates.problems"
+msgstr ""
+
+#. Default: "Properties"
+#: messages
+msgid "certificates.properties"
+msgstr ""
+
+#. Default: "Redo"
+#: messages
+msgid "certificates.redo"
+msgstr ""
+
+#. Default: "Sample data"
+#: messages
+msgid "certificates.sampleData"
+msgstr ""
+
+#. Default: "Select an element to edit it."
+#: messages
+msgid "certificates.selectElement"
+msgstr ""
+
+#. Default: "Selected: {id}"
+#: messages
+msgid "certificates.selected"
+msgstr ""
+
+#. Default: "Server preview"
+#: messages
+msgid "certificates.serverPreview"
+msgstr ""
+
+#. Default: "The template as saved, rendered by the server. Unsaved changes are not shown."
+#: messages
+msgid "certificates.serverPreviewNote"
+msgstr ""
+
+#. Default: "Save the template to see the server preview."
+#: messages
+msgid "certificates.serverPreviewUnsaved"
+msgstr ""
+
+#. Default: "Show sample data"
+#: messages
+msgid "certificates.showSample"
+msgstr ""
+
+#. Default: "Shrink to fit the maximum width"
+#: messages
+msgid "certificates.shrink"
+msgstr ""
+
+#. Default: "Size"
+#: messages
+msgid "certificates.size"
+msgstr ""
+
+#. Default: "Images"
+#: messages
+msgid "certificates.templateImages"
+msgstr ""
+
+#. Default: "Image"
+#: messages
+msgid "certificates.typeImage"
+msgstr ""
+
+#. Default: "QR code"
+#: messages
+msgid "certificates.typeQrcode"
+msgstr ""
+
+#. Default: "Text"
+#: messages
+msgid "certificates.typeText"
+msgstr ""
+
+#. Default: "Undo"
+#: messages
+msgid "certificates.undo"
+msgstr ""
+
+#. Default: "Upload a background first."
+#: messages
+msgid "certificates.uploadBackgroundFirst"
+msgstr ""
+
+#. Default: "Checking the certificate…"
+#: messages
+msgid "certificates.verifyChecking"
+msgstr ""
+
+#. Default: "Download the certificate (PDF)"
+#: messages
+msgid "certificates.verifyDownload"
+msgstr ""
+
+#. Default: "Issued on {date}"
+#: messages
+msgid "certificates.verifyIssued"
+msgstr ""
+
+#. Default: "No certificate with this ID was found."
+#: messages
+msgid "certificates.verifyNotFound"
+msgstr ""
+
+#. Default: "Certificate verification"
+#: messages
+msgid "certificates.verifyTitle"
+msgstr ""
+
+#. Default: "This certificate is valid"
+#: messages
+msgid "certificates.verifyValid"
+msgstr ""
+
+#. Default: "Width"
+#: messages
+msgid "certificates.width"
+msgstr ""
+
+#. Default: "X"
+#: messages
+msgid "certificates.x"
+msgstr ""
+
+#. Default: "Y"
+#: messages
+msgid "certificates.y"
+msgstr ""
+
+#. Default: "Zoom in"
+#: messages
+msgid "certificates.zoomIn"
+msgstr ""
+
+#. Default: "Zoom {percent}%"
+#: messages
+msgid "certificates.zoomLevel"
+msgstr ""
+
+#. Default: "Zoom out"
+#: messages
+msgid "certificates.zoomOut"
+msgstr ""

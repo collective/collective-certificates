@@ -1,0 +1,1 @@
+Added `contract-context.json` to the shared test fixtures: the fonts, fields, page and text sizes the frontend needs to reproduce the golden SVGs and the validation cases. @ericof

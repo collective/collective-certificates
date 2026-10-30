@@ -1,0 +1,22 @@
+{
+  "version": 1,
+  "page": {"width": 3508, "height": 2480},
+  "elements": [
+    {"id": "logo", "type": "image", "x": 0, "y": 0, "width": 700, "height": 500, "asset": "background", "rotation": 0},
+    {"id": "start", "type": "text", "x": 100, "y": 700, "anchor": "start", "baseline": "alphabetic",
+     "font": "inter", "size": 60, "color": "#102030", "content": "Start <&> \"quoted\" 'apostrophe'"},
+    {"id": "middle", "type": "text", "x": 1754, "y": 900, "anchor": "middle", "baseline": "middle",
+     "font": "eb-garamond", "size": 80, "color": "#405060", "content": "{{ full_name|upper }}", "fit": "none"},
+    {"id": "end", "type": "text", "x": 3400, "y": 1100, "anchor": "end", "baseline": "hanging",
+     "font": "caveat", "size": 70, "color": "#708090", "content": "{{ event_name|lower }}"},
+    {"id": "shrunk", "type": "text", "x": 100, "y": 1400, "anchor": "start", "baseline": "alphabetic",
+     "font": "eb-garamond-bold", "size": 200, "color": "#000000",
+     "content": "{{ event_start_date|date }} — {{ event_end_date|date }} ({{ total_hours }} h)",
+     "max_width": 1200, "fit": "shrink"},
+    {"id": "signature", "type": "image", "x": 100, "y": 1600, "width": 900, "height": 400, "asset": "signature"},
+    {"id": "signer", "type": "text", "x": 550, "y": 2100, "anchor": "middle", "baseline": "alphabetic",
+     "font": "inter-bold", "size": 40, "color": "#000000", "content": "{{ responsible_person }} · {{ certificate_uid|upper }}"},
+    {"id": "qr", "type": "qrcode", "x": 2900, "y": 1800, "size": 500,
+     "content": "{{ full_name }} {{ event_name }}", "ec": "H", "fg": "#0a0b0c", "bg": "#fafbfc"}
+  ]
+}

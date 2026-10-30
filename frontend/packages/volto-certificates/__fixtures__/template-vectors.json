@@ -1,0 +1,43 @@
+{
+  "description": "Placeholder language vectors shared by the backend and the frontend. 'render' cases give the expected output; 'error' is 'syntax' (parsing fails) or 'render' (a value cannot be rendered). 'tokens' lists the distinct tokens in order of first appearance. Month names are English.",
+  "data": {
+    "full_name": "William Riker",
+    "event_name": "Château Picard",
+    "event_start_date": "2026-05-06",
+    "event_end_date": "2026-12-31",
+    "responsible_person": "Jean-Luc Picard",
+    "total_hours": "32"
+  },
+  "cases": [
+    {"content": "Plain text", "expected": "Plain text", "tokens": []},
+    {"content": "{{ full_name }}", "expected": "William Riker", "tokens": ["full_name"]},
+    {"content": "{{full_name}}", "expected": "William Riker", "tokens": ["full_name"]},
+    {"content": "  {{   full_name   }}  ", "expected": "  William Riker  ", "tokens": ["full_name"]},
+    {"content": "{{ full_name|upper }}", "expected": "WILLIAM RIKER", "tokens": ["full_name"]},
+    {"content": "{{ full_name | lower }}", "expected": "william riker", "tokens": ["full_name"]},
+    {"content": "{{ event_name|upper }}", "expected": "CHÂTEAU PICARD", "tokens": ["event_name"]},
+    {"content": "{{ event_start_date|date }}", "expected": "06/05/2026", "tokens": ["event_start_date"]},
+    {"content": "{{ event_start_date|date }}", "date_format": "%B %-d, %Y", "expected": "May 6, 2026", "tokens": ["event_start_date"]},
+    {"content": "{{ event_end_date|date }}", "date_format": "%Y-%m-%d", "expected": "2026-12-31", "tokens": ["event_end_date"]},
+    {"content": "{{ event_end_date|date }}", "date_format": "%d%% %B", "expected": "31% December", "tokens": ["event_end_date"]},
+    {"content": "{{ event_start_date }}", "expected": "2026-05-06", "tokens": ["event_start_date"]},
+    {"content": "from {{ event_start_date|date }} to {{ event_end_date|date }}, {{ total_hours }} hours.", "expected": "from 06/05/2026 to 31/12/2026, 32 hours.", "tokens": ["event_start_date", "event_end_date", "total_hours"]},
+    {"content": "{{ full_name }} {{ full_name }}", "expected": "William Riker William Riker", "tokens": ["full_name"]},
+    {"content": "{{ full_name", "expected": "{{ full_name", "tokens": []},
+    {"content": "a {{ b", "expected": "a {{ b", "tokens": []},
+    {"content": "}} {{ full_name }}", "expected": "}} William Riker", "tokens": ["full_name"]},
+    {"content": "{ {{ full_name }} }", "expected": "{ William Riker }", "tokens": ["full_name"]},
+    {"content": "<b>&amp;</b>", "expected": "<b>&amp;</b>", "tokens": []},
+    {"content": "{{ full name }}", "error": "syntax"},
+    {"content": "{{ }}", "error": "syntax"},
+    {"content": "{{ Full_Name }}", "error": "syntax"},
+    {"content": "{{ full_name|upper|lower }}", "error": "syntax"},
+    {"content": "{{ full_name }} {{ 1abc }}", "error": "syntax"},
+    {"content": "{{ email }}", "error": "render", "tokens": ["email"]},
+    {"content": "{{ full_name|title }}", "error": "render", "tokens": ["full_name"]},
+    {"content": "{{ full_name|date }}", "error": "render", "tokens": ["full_name"]},
+    {"content": "{{ event_start_date|date }}", "date_format": "%A", "error": "render", "tokens": ["event_start_date"]},
+    {"content": "{{ event_start_date|date }}", "data": {"event_start_date": "2026-02-30"}, "error": "render", "tokens": ["event_start_date"]},
+    {"content": "{{ event_start_date|date }}", "data": {"event_start_date": "26/05/2026"}, "error": "render", "tokens": ["event_start_date"]}
+  ]
+}

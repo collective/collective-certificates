@@ -1,0 +1,62 @@
+name: Storybook
+
+# The steps of plone/meta's frontend-storybook.yml, with an upload of the
+# build instead of a push to the gh-pages branch: pages.yml publishes it under
+# storybook/ on the documentation site.
+
+on:
+  workflow_call:
+    inputs:
+      node-version:
+        required: true
+        type: string
+      working-directory:
+        required: false
+        type: string
+        default: frontend
+    outputs:
+      artifact-name:
+        description: "Name of the uploaded Storybook artifact"
+        value: ${{ jobs.storybook.outputs.artifact-name }}
+
+jobs:
+
+  storybook:
+    name: "Storybook: Build"
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ${{ inputs.working-directory }}
+    outputs:
+      artifact-name: storybook
+    steps:
+      - name: Main checkout
+        uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+
+      - name: Setup uv
+        uses: plone/meta/.github/actions/setup_uv@2.x
+        with:
+          working-directory: ${{ inputs.working-directory }}
+
+      - name: Setup codebase
+        uses: plone/meta/.github/actions/setup_frontend@2.x
+        with:
+          node-version: ${{ inputs.node-version }}
+          working-directory: ${{ inputs.working-directory }}
+
+      - name: Generate Storybook
+        shell: bash
+        run: |
+          make storybook-build
+
+      - name: Upload Storybook
+        uses: actions/upload-artifact@v7
+        with:
+          name: storybook
+          path: ${{ inputs.working-directory }}/.storybook-build
+          # .storybook-build is a dot directory, which upload-artifact skips
+          # unless hidden files are included.
+          include-hidden-files: true
+          if-no-files-found: error

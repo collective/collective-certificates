@@ -1,0 +1,15 @@
+<configure xmlns="http://namespaces.zope.org/zope">
+
+  <subscriber
+      for="collective.certificates.content.template.ICertificateTemplate
+           zope.lifecycleevent.interfaces.IObjectAddedEvent"
+      handler=".page_sync.sync_page"
+      />
+
+  <subscriber
+      for="collective.certificates.content.template.ICertificateTemplate
+           zope.lifecycleevent.interfaces.IObjectModifiedEvent"
+      handler=".page_sync.sync_page"
+      />
+
+</configure>

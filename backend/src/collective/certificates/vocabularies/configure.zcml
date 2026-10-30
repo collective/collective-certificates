@@ -1,0 +1,28 @@
+<configure xmlns="http://namespaces.zope.org/zope">
+
+  <utility
+      name="collective.certificates.Fonts"
+      component=".certificates.fonts_vocabulary"
+      />
+
+  <utility
+      name="collective.certificates.Fields"
+      component=".certificates.fields_vocabulary"
+      />
+
+  <utility
+      name="collective.certificates.FieldKinds"
+      component=".certificates.field_kinds_vocabulary"
+      />
+
+  <utility
+      name="collective.certificates.DateFormats"
+      component=".certificates.date_formats_vocabulary"
+      />
+
+  <utility
+      name="collective.certificates.QrErrorCorrection"
+      component=".certificates.qr_error_correction_vocabulary"
+      />
+
+</configure>

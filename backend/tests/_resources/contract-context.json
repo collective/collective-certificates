@@ -1,0 +1,85 @@
+{
+ "description": "Context of the shared fixtures. Validation uses fonts, page and assets; field kinds come from the FieldKinds vocabulary. Goldens render with every field's sample, the golden assets as hrefs, and the text sizes listed here. Date formats map a template's date_format token to the pattern the renderer receives.",
+ "fonts": [
+  "caveat",
+  "eb-garamond",
+  "eb-garamond-bold",
+  "inter",
+  "inter-bold"
+ ],
+ "fields": {
+  "full_name": {
+   "kind": "text",
+   "sample": "Patrick Stewart"
+  },
+  "event_name": {
+   "kind": "text",
+   "sample": "Star Trek: Picard"
+  },
+  "event_start_date": {
+   "kind": "date",
+   "sample": "2026-05-26"
+  },
+  "event_end_date": {
+   "kind": "date",
+   "sample": "2026-06-09"
+  },
+  "responsible_person": {
+   "kind": "text",
+   "sample": "Jean-Luc Picard"
+  },
+  "total_hours": {
+   "kind": "text",
+   "sample": "47"
+  },
+  "certificate_uid": {
+   "kind": "computed",
+   "sample": "257e08fdcd07ff6fa3d1bc14f6aec321"
+  },
+  "verification_url": {
+   "kind": "computed",
+   "sample": "https://example.org/verify/257e08fdcd07ff6fa3d1bc14f6aec321"
+  }
+ },
+ "page": [
+  3508,
+  2480
+ ],
+ "assets": [
+  "background",
+  "signature"
+ ],
+ "golden_assets": {
+  "background": "asset:background",
+  "signature": "asset:signature"
+ },
+ "golden_sizes": {
+  "sample": {
+   "certify": 64,
+   "name": 120,
+   "attended": 64,
+   "event": 110,
+   "period": 52,
+   "signer": 44,
+   "role": 36
+  },
+  "minimal": {
+   "name": 96
+  },
+  "every-element": {
+   "start": 60,
+   "middle": 80,
+   "end": 70,
+   "shrunk": 84,
+   "signer": 40
+  }
+ },
+ "date_formats": {
+  "day-month-year": "%d/%m/%Y",
+  "month-day-year": "%m/%d/%Y",
+  "iso": "%Y-%m-%d",
+  "long": "%B %-d, %Y",
+  "long-day-first": "%-d %B %Y"
+ },
+ "default_date_format": "day-month-year"
+}

@@ -1,0 +1,13 @@
+.certificate-blueprint-preview {
+  overflow: hidden;
+  width: 100%;
+  border: 1px solid #d0d4da;
+  margin-bottom: 0.5rem;
+  background: #ffffff;
+
+  > svg {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+}

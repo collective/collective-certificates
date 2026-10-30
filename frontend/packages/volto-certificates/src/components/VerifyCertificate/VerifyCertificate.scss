@@ -1,0 +1,25 @@
+.verify-certificate {
+  .verify-issued {
+    color: #5c6370;
+  }
+
+  .verify-fields {
+    display: grid;
+    margin: 1.5rem 0;
+    gap: 0.5rem 1.5rem;
+    grid-template-columns: max-content 1fr;
+
+    /* Each term and its value stay in the grid, without a wrapper box. */
+    > div {
+      display: contents;
+    }
+
+    dt {
+      font-weight: bold;
+    }
+
+    dd {
+      margin: 0;
+    }
+  }
+}

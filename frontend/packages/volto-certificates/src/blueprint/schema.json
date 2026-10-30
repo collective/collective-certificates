@@ -1,0 +1,193 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://collective.github.io/collective-certificates/blueprint.schema.json",
+  "title": "Certificate blueprint",
+  "description": "Layout of a certificate: a page in the background image's pixel space and the elements drawn on it, in order.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["version", "page", "elements"],
+  "properties": {
+    "version": {
+      "description": "Blueprint format version.",
+      "const": 1
+    },
+    "page": {
+      "$ref": "#/$defs/page"
+    },
+    "elements": {
+      "description": "Elements drawn over the background, in document order.",
+      "type": "array",
+      "maxItems": 100,
+      "items": {
+        "$ref": "#/$defs/element"
+      }
+    }
+  },
+  "$defs": {
+    "page": {
+      "description": "Page size; equals the background image's pixel dimensions.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["width", "height"],
+      "properties": {
+        "width": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 20000
+        },
+        "height": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 20000
+        }
+      }
+    },
+    "id": {
+      "description": "Unique element identifier.",
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9_-]{0,31}$"
+    },
+    "asset": {
+      "description": "background, or the id of an Image item inside the template.",
+      "type": "string",
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,99}$"
+    },
+    "coordinate": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 20000
+    },
+    "length": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 20000
+    },
+    "color": {
+      "type": "string",
+      "pattern": "^#[0-9a-f]{6}$"
+    },
+    "content": {
+      "description": "Text with {{ token }} and {{ token|filter }} placeholders.",
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 500
+    },
+    "rotation": {
+      "description": "Reserved; rotation is not supported in version 1.",
+      "const": 0
+    },
+    "element": {
+      "type": "object",
+      "required": ["type"],
+      "properties": {
+        "type": {
+          "enum": ["text", "image", "qrcode"]
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "type": "object",
+            "properties": { "type": { "const": "text" } },
+            "required": ["type"]
+          },
+          "then": { "$ref": "#/$defs/text" }
+        },
+        {
+          "if": {
+            "type": "object",
+            "properties": { "type": { "const": "image" } },
+            "required": ["type"]
+          },
+          "then": { "$ref": "#/$defs/image" }
+        },
+        {
+          "if": {
+            "type": "object",
+            "properties": { "type": { "const": "qrcode" } },
+            "required": ["type"]
+          },
+          "then": { "$ref": "#/$defs/qrcode" }
+        }
+      ]
+    },
+    "text": {
+      "description": "One line of text, positioned by its anchor point.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "type",
+        "x",
+        "y",
+        "anchor",
+        "baseline",
+        "font",
+        "size",
+        "color",
+        "content"
+      ],
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "type": { "const": "text" },
+        "x": { "$ref": "#/$defs/coordinate" },
+        "y": { "$ref": "#/$defs/coordinate" },
+        "rotation": { "$ref": "#/$defs/rotation" },
+        "anchor": { "enum": ["start", "middle", "end"] },
+        "baseline": { "enum": ["alphabetic", "middle", "hanging"] },
+        "font": {
+          "description": "Token of the Fonts vocabulary.",
+          "type": "string",
+          "pattern": "^[a-z0-9][a-z0-9-]{0,63}$"
+        },
+        "size": {
+          "description": "Font size in page pixels.",
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 2000
+        },
+        "color": { "$ref": "#/$defs/color" },
+        "content": { "$ref": "#/$defs/content" },
+        "max_width": { "$ref": "#/$defs/length" },
+        "fit": {
+          "description": "With shrink, the size is lowered until the text fits max_width.",
+          "enum": ["none", "shrink"]
+        }
+      }
+    },
+    "image": {
+      "description": "An image of the template, fitted inside its box: the background, or an Image item inside the template.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "type", "x", "y", "width", "height", "asset"],
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "type": { "const": "image" },
+        "x": { "$ref": "#/$defs/coordinate" },
+        "y": { "$ref": "#/$defs/coordinate" },
+        "rotation": { "$ref": "#/$defs/rotation" },
+        "width": { "$ref": "#/$defs/length" },
+        "height": { "$ref": "#/$defs/length" },
+        "asset": { "$ref": "#/$defs/asset" }
+      }
+    },
+    "qrcode": {
+      "description": "A square QR code encoding the rendered content.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "type", "x", "y", "size", "content", "ec", "fg", "bg"],
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "type": { "const": "qrcode" },
+        "x": { "$ref": "#/$defs/coordinate" },
+        "y": { "$ref": "#/$defs/coordinate" },
+        "rotation": { "$ref": "#/$defs/rotation" },
+        "size": { "$ref": "#/$defs/length" },
+        "content": { "$ref": "#/$defs/content" },
+        "ec": { "enum": ["L", "M", "Q", "H"] },
+        "fg": { "$ref": "#/$defs/color" },
+        "bg": { "$ref": "#/$defs/color" }
+      }
+    }
+  }
+}

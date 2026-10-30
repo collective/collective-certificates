@@ -1,0 +1,8 @@
+{
+  "version": 1,
+  "page": {"width": 3508, "height": 2480},
+  "elements": [
+    {"id": "name", "type": "text", "x": 1754, "y": 1240, "anchor": "middle", "baseline": "middle",
+     "font": "inter", "size": 96, "color": "#000000", "content": "{{ full_name }}"}
+  ]
+}

@@ -1,0 +1,1 @@
+Tested the backend on Python 3.11 to 3.14 with Plone 6.1 and 6.2, dropped Plone 6.0, and removed CI path filters for files that do not exist. @ericof

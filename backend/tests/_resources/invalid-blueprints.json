@@ -1,0 +1,150 @@
+{
+  "description": "Invalid blueprints and the (element, path) of every issue they must produce. Validated with fonts = the bundled tokens, background = 3508x2480 and assets = background + signature unless a case sets 'context'. Messages are not compared: they differ between implementations.",
+  "cases": [
+    {
+      "name": "wrong-version",
+      "blueprint": {"version": 2, "page": {"width": 3508, "height": 2480}, "elements": []},
+      "errors": [{"element": null, "path": "/version"}]
+    },
+    {
+      "name": "extra-root-property",
+      "blueprint": {"version": 1, "page": {"width": 3508, "height": 2480}, "elements": [], "svg": "<svg/>"},
+      "errors": [{"element": null, "path": ""}]
+    },
+    {
+      "name": "missing-page",
+      "blueprint": {"version": 1, "elements": []},
+      "errors": [{"element": null, "path": ""}]
+    },
+    {
+      "name": "page-not-integer",
+      "blueprint": {"version": 1, "page": {"width": 3508.5, "height": 2480}, "elements": []},
+      "errors": [{"element": null, "path": "/page/width"}]
+    },
+    {
+      "name": "bad-id",
+      "blueprint": {"version": 1, "page": {"width": 3508, "height": 2480}, "elements": [
+        {"id": "Name", "type": "text", "x": 1, "y": 1, "anchor": "start", "baseline": "alphabetic", "font": "inter", "size": 10, "color": "#000000", "content": "x"}
+      ]},
+      "errors": [{"element": "Name", "path": "/elements/0/id"}]
+    },
+    {
+      "name": "bad-color",
+      "blueprint": {"version": 1, "page": {"width": 3508, "height": 2480}, "elements": [
+        {"id": "a", "type": "text", "x": 1, "y": 1, "anchor": "start", "baseline": "alphabetic", "font": "inter", "size": 10, "color": "#FFFFFF", "content": "x"}
+      ]},
+      "errors": [{"element": "a", "path": "/elements/0/color"}]
+    },
+    {
+      "name": "unknown-type",
+      "blueprint": {"version": 1, "page": {"width": 3508, "height": 2480}, "elements": [
+        {"id": "a", "type": "circle", "x": 1, "y": 1}
+      ]},
+      "errors": [{"element": "a", "path": "/elements/0/type"}]
+    },
+    {
+      "name": "element-not-object",
+      "blueprint": {"version": 1, "page": {"width": 3508, "height": 2480}, "elements": [42]},
+      "errors": [{"element": null, "path": "/elements/0"}]
+    },
+    {
+      "name": "text-missing-font",
+      "blueprint": {"version": 1, "page": {"width": 3508, "height": 2480}, "elements": [
+        {"id": "a", "type": "text", "x": 1, "y": 1, "anchor": "start", "baseline": "alphabetic", "size": 10, "color": "#000000", "content": "x"}
+      ]},
+      "errors": [{"element": "a", "path": "/elements/0"}]
+    },
+    {
+      "name": "image-extra-property",
+      "blueprint": {"version": 1, "page": {"width": 3508, "height": 2480}, "elements": [
+        {"id": "a", "type": "image", "x": 1, "y": 1, "width": 10, "height": 10, "asset": "signature", "url": "http://example.org/x.png"}
+      ]},
+      "errors": [{"element": "a", "path": "/elements/0"}]
+    },
+    {
+      "name": "asset-not-an-id",
+      "blueprint": {"version": 1, "page": {"width": 3508, "height": 2480}, "elements": [
+        {"id": "a", "type": "image", "x": 1, "y": 1, "width": 10, "height": 10, "asset": "../signature"}
+      ]},
+      "errors": [{"element": "a", "path": "/elements/0/asset"}]
+    },
+    {
+      "name": "rotation",
+      "blueprint": {"version": 1, "page": {"width": 3508, "height": 2480}, "elements": [
+        {"id": "a", "type": "qrcode", "x": 1, "y": 1, "size": 100, "content": "x", "ec": "M", "fg": "#000000", "bg": "#ffffff", "rotation": 90}
+      ]},
+      "errors": [{"element": "a", "path": "/elements/0/rotation"}]
+    },
+    {
+      "name": "two-schema-errors",
+      "blueprint": {"version": 1, "page": {"width": 3508, "height": 2480}, "elements": [
+        {"id": "a", "type": "text", "x": -1, "y": 1, "anchor": "left", "baseline": "alphabetic", "font": "inter", "size": 10, "color": "#000000", "content": "x"}
+      ]},
+      "errors": [{"element": "a", "path": "/elements/0/anchor"}, {"element": "a", "path": "/elements/0/x"}]
+    },
+    {
+      "name": "duplicate-id",
+      "blueprint": {"version": 1, "page": {"width": 3508, "height": 2480}, "elements": [
+        {"id": "a", "type": "text", "x": 1, "y": 1, "anchor": "start", "baseline": "alphabetic", "font": "inter", "size": 10, "color": "#000000", "content": "x"},
+        {"id": "a", "type": "image", "x": 1, "y": 1, "width": 10, "height": 10, "asset": "signature"}
+      ]},
+      "errors": [{"element": "a", "path": "/elements/1/id"}]
+    },
+    {
+      "name": "unknown-font",
+      "blueprint": {"version": 1, "page": {"width": 3508, "height": 2480}, "elements": [
+        {"id": "a", "type": "text", "x": 1, "y": 1, "anchor": "start", "baseline": "alphabetic", "font": "comic-sans", "size": 10, "color": "#000000", "content": "x"}
+      ]},
+      "errors": [{"element": "a", "path": "/elements/0/font"}]
+    },
+    {
+      "name": "unknown-token",
+      "blueprint": {"version": 1, "page": {"width": 3508, "height": 2480}, "elements": [
+        {"id": "a", "type": "text", "x": 1, "y": 1, "anchor": "start", "baseline": "alphabetic", "font": "inter", "size": 10, "color": "#000000", "content": "{{ full_name }} {{ email }}"}
+      ]},
+      "errors": [{"element": "a", "path": "/elements/0/content"}]
+    },
+    {
+      "name": "unknown-filter",
+      "blueprint": {"version": 1, "page": {"width": 3508, "height": 2480}, "elements": [
+        {"id": "q", "type": "qrcode", "x": 1, "y": 1, "size": 100, "content": "{{ full_name|title }}", "ec": "M", "fg": "#000000", "bg": "#ffffff"}
+      ]},
+      "errors": [{"element": "q", "path": "/elements/0/content"}]
+    },
+    {
+      "name": "date-on-text-field",
+      "blueprint": {"version": 1, "page": {"width": 3508, "height": 2480}, "elements": [
+        {"id": "a", "type": "text", "x": 1, "y": 1, "anchor": "start", "baseline": "alphabetic", "font": "inter", "size": 10, "color": "#000000", "content": "{{ full_name|date }}"}
+      ]},
+      "errors": [{"element": "a", "path": "/elements/0/content"}]
+    },
+    {
+      "name": "placeholder-syntax",
+      "blueprint": {"version": 1, "page": {"width": 3508, "height": 2480}, "elements": [
+        {"id": "a", "type": "text", "x": 1, "y": 1, "anchor": "start", "baseline": "alphabetic", "font": "inter", "size": 10, "color": "#000000", "content": "{{ full name }}"}
+      ]},
+      "errors": [{"element": "a", "path": "/elements/0/content"}]
+    },
+    {
+      "name": "outside-page",
+      "blueprint": {"version": 1, "page": {"width": 3508, "height": 2480}, "elements": [
+        {"id": "q", "type": "qrcode", "x": 3400, "y": 1, "size": 200, "content": "x", "ec": "M", "fg": "#000000", "bg": "#ffffff"},
+        {"id": "t", "type": "text", "x": 3509, "y": 1, "anchor": "end", "baseline": "alphabetic", "font": "inter", "size": 10, "color": "#000000", "content": "x"}
+      ]},
+      "errors": [{"element": "q", "path": "/elements/0"}, {"element": "t", "path": "/elements/1"}]
+    },
+    {
+      "name": "page-mismatch",
+      "blueprint": {"version": 1, "page": {"width": 1000, "height": 700}, "elements": []},
+      "errors": [{"element": null, "path": "/page"}]
+    },
+    {
+      "name": "missing-asset",
+      "context": {"assets": ["background"]},
+      "blueprint": {"version": 1, "page": {"width": 3508, "height": 2480}, "elements": [
+        {"id": "sig", "type": "image", "x": 1, "y": 1, "width": 10, "height": 10, "asset": "signature"}
+      ]},
+      "errors": [{"element": "sig", "path": "/elements/0/asset"}]
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:browser="http://namespaces.zope.org/browser"
+    >
+
+  <browser:page
+      name="certificate-font"
+      for="plone.base.interfaces.siteroot.IPloneSiteRoot"
+      class=".view.FontView"
+      permission="zope2.View"
+      layer="collective.certificates.interfaces.IBrowserLayer"
+      />
+
+</configure>

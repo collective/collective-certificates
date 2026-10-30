@@ -1,0 +1,56 @@
+{
+  "name": "@plone-collective/volto-certificates",
+  "version": "1.0.0-alpha.0",
+  "description": "Generate and store participation certificates for events.",
+  "main": "src/index.ts",
+  "license": "MIT",
+  "keywords": [
+    "volto-addon",
+    "volto",
+    "plone",
+    "react"
+  ],
+  "author": "Érico Andrei",
+  "homepage": "https://github.com/collective/collective-certificates#readme",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:collective/collective-certificates"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "i18n": "rm -rf build/messages && NODE_ENV=production i18n --addon",
+    "typecheck": "tsc --noEmit -p tsconfig.dev.json",
+    "coverage": "vitest run --coverage",
+    "dry-release": "release-it --dry-run",
+    "release": "release-it",
+    "release-major-alpha": "release-it major --preRelease=alpha",
+    "release-alpha": "release-it --preRelease=alpha"
+  },
+  "addons": [],
+  "theme": "",
+  "peerDependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "devDependencies": {
+    "@plone/registry": "workspace:*",
+    "@plone/scripts": "workspace:*",
+    "@plone/types": "workspace:*",
+    "@storybook/react": "8.6.19",
+    "@testing-library/react": "^16.2.0",
+    "@types/react": "^18.3.1",
+    "@types/react-dom": "^18.3.1",
+    "@vitest/coverage-v8": "3.2.7",
+    "react-intl": "3.12.1",
+    "react-redux": "8.1.2",
+    "release-it": "^19.0.5",
+    "semantic-ui-react": "2.1.5",
+    "typescript": "^5.7.3",
+    "vitest": "^3.1.2"
+  },
+  "dependencies": {
+    "react-moveable": "^0.56.0"
+  }
+}

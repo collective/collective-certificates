@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rolemap>
+  <permissions>
+    <!-- Managers can add templates and certificates on the example site. -->
+    <permission acquire="False"
+                name="collective.certificates: Add CertificateTemplate"
+    >
+      <role name="Manager" />
+    </permission>
+    <permission acquire="False"
+                name="collective.certificates: Add Certificate"
+    >
+      <role name="Manager" />
+    </permission>
+  </permissions>
+</rolemap>

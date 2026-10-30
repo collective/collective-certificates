@@ -1,0 +1,11 @@
+<configure xmlns="http://namespaces.zope.org/zope">
+
+  <include package=".certificate_verification" />
+  <include package=".certificates_csv" />
+  <include package=".create_certificate" />
+  <include package=".create_certificates" />
+  <include package=".preview" />
+  <include package=".render" />
+  <include package=".validate_blueprint" />
+
+</configure>

@@ -1,0 +1,370 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"POT-Creation-Date: 2026-10-30 04:27+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0\n"
+"Language-Code: pt_BR\n"
+"Language-Name: English\n"
+"Preferred-Encodings: utf-8 latin1\n"
+"Domain: DOMAIN\n"
+
+#: collective/certificates/profiles/default/types/CertificateTemplate.xml
+msgid "A certificate layout over a background image."
+msgstr "Um modelo de certificado sobre uma imagem de fundo."
+
+#: collective/certificates/profiles/default/types/Certificate.xml
+msgid "An issued certificate, rendered from a certificate template."
+msgstr "Um certificado emitido, gerado a partir de um modelo de certificado."
+
+#: collective/certificates/profiles.zcml:22
+msgid "Attendance Certificates for Plone: Example content"
+msgstr "Certificados de Participação para Plone: conteúdo de exemplo"
+
+#: collective/certificates/profiles.zcml:13
+msgid "Attendance Certificates for Plone: Install"
+msgstr "Certificados de Participação para Plone: instalação"
+
+#: collective/certificates/profiles.zcml:30
+msgid "Attendance Certificates for Plone: Uninstall"
+msgstr "Certificados de Participação para Plone: desinstalação"
+
+#: collective/certificates/profiles/default/types/Certificate.xml
+msgid "Certificate"
+msgstr "Certificado"
+
+#: collective/certificates/profiles/default/types/CertificateTemplate.xml
+msgid "Certificate Template"
+msgstr "Modelo de Certificado"
+
+#: collective/certificates/profiles.zcml:22
+msgid "Create example content to showcase this addon."
+msgstr "Cria conteúdo de exemplo para demonstrar este complemento."
+
+#: collective/certificates/profiles/default/types/Certificate.xml
+#: collective/certificates/profiles/default/types/CertificateTemplate.xml
+msgid "Edit"
+msgstr "Editar"
+
+#: collective/certificates/profiles.zcml:13
+msgid "Generate and store participation certificates for events."
+msgstr "Gera e armazena certificados de participação em eventos."
+
+#: collective/certificates/profiles.zcml:30
+msgid "Uninstall Attendance Certificates for Plone setup."
+msgstr "Desinstala a configuração dos Certificados de Participação para Plone."
+
+#: collective/certificates/profiles/default/types/Certificate.xml
+#: collective/certificates/profiles/default/types/CertificateTemplate.xml
+msgid "View"
+msgstr "Visualizar"
+
+#. Default: "You cannot add certificates to ${path}."
+#: collective/certificates/api/batch.py:227
+msgid "error_csv_cannot_add"
+msgstr "Você não pode adicionar certificados em ${path}."
+
+#. Default: "No container at ${path}."
+#: collective/certificates/api/batch.py:239
+msgid "error_csv_container_not_found"
+msgstr "Não há contêiner em ${path}."
+
+#. Default: "Column ${column} appears more than once."
+#: collective/certificates/api/batch.py:156
+msgid "error_csv_duplicate_column"
+msgstr "A coluna ${column} aparece mais de uma vez."
+
+#. Default: "The file has no rows."
+#: collective/certificates/api/batch.py:190
+msgid "error_csv_empty"
+msgstr "O arquivo não tem linhas."
+
+#. Default: "The file has characters that could not be read. Save it as CSV in UTF-8 and upload it again."
+#: collective/certificates/api/batch.py:120
+msgid "error_csv_encoding"
+msgstr "O arquivo tem caracteres que não puderam ser lidos. Salve-o como CSV em UTF-8 e envie-o de novo."
+
+#. Default: "Missing value for ${field}."
+#: collective/certificates/api/batch.py:270
+msgid "error_csv_missing_value"
+msgstr "Falta o valor de ${field}."
+
+#. Default: "No parent container."
+#: collective/certificates/api/batch.py:216
+msgid "error_csv_no_container"
+msgstr "Falta o contêiner pai."
+
+#. Default: "The file has no ${column} column."
+#: collective/certificates/api/batch.py:169
+msgid "error_csv_no_container_column"
+msgstr "O arquivo não tem a coluna ${column}."
+
+#. Default: "Unknown column ${column}."
+#: collective/certificates/api/batch.py:143
+msgid "error_csv_unknown_column"
+msgstr "Coluna desconhecida: ${column}."
+
+#. Default: "${element}: the date filter needs a date field, not ${token}."
+#: collective/certificates/blueprint/validate.py:164
+msgid "error_date_filter"
+msgstr "${element}: o filtro date exige um campo de data, não ${token}."
+
+#. Default: "${element}: another element has the same id."
+#: collective/certificates/blueprint/validate.py:242
+msgid "error_duplicate_id"
+msgstr "${element}: outro elemento tem o mesmo id."
+
+#. Default: "${element}: the template has no ${asset} image."
+#: collective/certificates/blueprint/validate.py:273
+msgid "error_missing_asset"
+msgstr "${element}: o modelo não tem a imagem ${asset}."
+
+#. Default: "${element}: the element does not fit on the page."
+#: collective/certificates/blueprint/validate.py:286
+msgid "error_outside_page"
+msgstr "${element}: o elemento não cabe na página."
+
+#. Default: "The page is ${page_width}x${page_height} but the background is ${width}x${height}."
+#: collective/certificates/blueprint/validate.py:219
+msgid "error_page_size"
+msgstr "A página tem ${page_width}x${page_height}, mas o fundo tem ${width}x${height}."
+
+#. Default: "${element}: ${detail}"
+#: collective/certificates/blueprint/validate.py:125
+msgid "error_placeholder_syntax"
+msgstr "${element}: ${detail}"
+
+#. Default: "Invalid value at ${path}: ${detail}"
+#: collective/certificates/blueprint/validate.py:98
+msgid "error_schema"
+msgstr "Valor inválido em ${path}: ${detail}"
+
+#. Default: "${element}: unknown filter ${filter}."
+#: collective/certificates/blueprint/validate.py:152
+msgid "error_unknown_filter"
+msgstr "${element}: filtro desconhecido ${filter}."
+
+#. Default: "${element}: unknown font ${font}."
+#: collective/certificates/blueprint/validate.py:255
+msgid "error_unknown_font"
+msgstr "${element}: fonte desconhecida ${font}."
+
+#. Default: "${element}: unknown field ${token}."
+#: collective/certificates/blueprint/validate.py:140
+msgid "error_unknown_token"
+msgstr "${element}: campo desconhecido ${token}."
+
+#. Default: "Certificate ID"
+#: collective/certificates/blueprint/fields.py:73
+msgid "field_certificate_uid"
+msgstr "ID do certificado"
+
+#. Default: "Event end date"
+#: collective/certificates/blueprint/fields.py:55
+msgid "field_event_end_date"
+msgstr "Data de término do evento"
+
+#. Default: "Event name"
+#: collective/certificates/blueprint/fields.py:43
+msgid "field_event_name"
+msgstr "Nome do evento"
+
+#. Default: "Event start date"
+#: collective/certificates/blueprint/fields.py:49
+msgid "field_event_start_date"
+msgstr "Data de início do evento"
+
+#. Default: "Full name"
+#: collective/certificates/blueprint/fields.py:37
+msgid "field_full_name"
+msgstr "Nome completo"
+
+#. Default: "Responsible person"
+#: collective/certificates/blueprint/fields.py:61
+msgid "field_responsible_person"
+msgstr "Responsável"
+
+#. Default: "Total hours"
+#: collective/certificates/blueprint/fields.py:67
+msgid "field_total_hours"
+msgstr "Carga horária"
+
+#. Default: "Verification URL"
+#: collective/certificates/blueprint/fields.py:79
+msgid "field_verification_url"
+msgstr "URL de verificação"
+
+#. Default: "The page of the certificate. Its size in pixels is the page size."
+#: collective/certificates/content/template.py:77
+msgid "help_background"
+msgstr "A página do certificado. O tamanho dela em pixels é o tamanho da página."
+
+#. Default: "Where each text, image and QR code goes on the page."
+#: collective/certificates/content/template.py:86
+msgid "help_blueprint"
+msgstr "Onde cada texto, imagem e QR code fica na página."
+
+#. Default: "Field values the certificate was rendered with."
+#: collective/certificates/content/certificate.py:41
+msgid "help_certificate_data"
+msgstr "Valores dos campos com que o certificado foi gerado."
+
+#. Default: "The certificate as it was issued, PDF or PNG."
+#: collective/certificates/content/certificate.py:32
+msgid "help_certificate_file"
+msgstr "O certificado como foi emitido, em PDF ou PNG."
+
+#. Default: "How the date filter writes dates."
+#: collective/certificates/content/template.py:110
+msgid "help_date_format"
+msgstr "Como o filtro date escreve datas."
+
+#. Default: "Absolute path of a directory with additional .ttf or .otf files. Each file becomes a font named after the file."
+#: collective/certificates/interfaces.py:18
+msgid "help_extra_font_dir"
+msgstr "Caminho absoluto de um diretório com arquivos .ttf ou .otf adicionais. Cada arquivo vira uma fonte com o nome do arquivo."
+
+#. Default: "Dots per inch used to size the page of generated PDFs."
+#: collective/certificates/interfaces.py:31
+msgid "help_pdf_dpi"
+msgstr "Pontos por polegada usados para dimensionar a página dos PDFs gerados."
+
+#. Default: "Field values used by the designer and the preview."
+#: collective/certificates/content/template.py:98
+msgid "help_sample_data"
+msgstr "Valores dos campos usados pelo editor e pela pré-visualização."
+
+#. Default: "UID of the certificate template it was rendered from."
+#: collective/certificates/content/certificate.py:53
+msgid "help_template_uid"
+msgstr "UID do modelo de certificado de onde ele foi gerado."
+
+#. Default: "Background"
+#: collective/certificates/content/template.py:76
+msgid "label_background"
+msgstr "Fundo"
+
+#. Default: "Design"
+#: collective/certificates/content/template.py:85
+msgid "label_blueprint"
+msgstr "Design"
+
+#. Default: "Values"
+#: collective/certificates/content/certificate.py:40
+msgid "label_certificate_data"
+msgstr "Valores"
+
+#. Default: "File"
+#: collective/certificates/content/certificate.py:31
+msgid "label_certificate_file"
+msgstr "Arquivo"
+
+#. Default: "Date format"
+#: collective/certificates/content/template.py:109
+msgid "label_date_format"
+msgstr "Formato de data"
+
+#. Default: "Extra font directory"
+#: collective/certificates/interfaces.py:17
+msgid "label_extra_font_dir"
+msgstr "Diretório de fontes adicionais"
+
+#. Default: "PDF resolution"
+#: collective/certificates/interfaces.py:30
+msgid "label_pdf_dpi"
+msgstr "Resolução do PDF"
+
+#. Default: "Sample data"
+#: collective/certificates/content/template.py:97
+msgid "label_sample_data"
+msgstr "Dados de exemplo"
+
+#. Default: "Template"
+#: collective/certificates/content/certificate.py:52
+msgid "label_template_uid"
+msgstr "Modelo"
+
+#. Default: "January"
+#: collective/certificates/utils/rendering.py:36
+msgid "month_1"
+msgstr "janeiro"
+
+#. Default: "October"
+#: collective/certificates/utils/rendering.py:45
+msgid "month_10"
+msgstr "outubro"
+
+#. Default: "November"
+#: collective/certificates/utils/rendering.py:46
+msgid "month_11"
+msgstr "novembro"
+
+#. Default: "December"
+#: collective/certificates/utils/rendering.py:47
+msgid "month_12"
+msgstr "dezembro"
+
+#. Default: "February"
+#: collective/certificates/utils/rendering.py:37
+msgid "month_2"
+msgstr "fevereiro"
+
+#. Default: "March"
+#: collective/certificates/utils/rendering.py:38
+msgid "month_3"
+msgstr "março"
+
+#. Default: "April"
+#: collective/certificates/utils/rendering.py:39
+msgid "month_4"
+msgstr "abril"
+
+#. Default: "May"
+#: collective/certificates/utils/rendering.py:40
+msgid "month_5"
+msgstr "maio"
+
+#. Default: "June"
+#: collective/certificates/utils/rendering.py:41
+msgid "month_6"
+msgstr "junho"
+
+#. Default: "July"
+#: collective/certificates/utils/rendering.py:42
+msgid "month_7"
+msgstr "julho"
+
+#. Default: "August"
+#: collective/certificates/utils/rendering.py:43
+msgid "month_8"
+msgstr "agosto"
+
+#. Default: "September"
+#: collective/certificates/utils/rendering.py:44
+msgid "month_9"
+msgstr "setembro"
+
+#. Default: "High (30%)"
+#: collective/certificates/vocabularies/certificates.py:63
+msgid "qr_ec_h"
+msgstr "Alta (30%)"
+
+#. Default: "Low (7%)"
+#: collective/certificates/vocabularies/certificates.py:60
+msgid "qr_ec_l"
+msgstr "Baixa (7%)"
+
+#. Default: "Medium (15%)"
+#: collective/certificates/vocabularies/certificates.py:61
+msgid "qr_ec_m"
+msgstr "Média (15%)"
+
+#. Default: "Quartile (25%)"
+#: collective/certificates/vocabularies/certificates.py:62
+msgid "qr_ec_q"
+msgstr "Quartil (25%)"

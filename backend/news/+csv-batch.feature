@@ -1,0 +1,1 @@
+Added the `@certificates-csv` and `@create-certificates` REST services and `collective.certificates.api.batch.create_certificates()`: a CSV file with a `parent_container` column and one column per field creates one certificate per row, or none when any row is invalid, every issue listed by line and column; text damaged by a wrong encoding is refused. @ericof

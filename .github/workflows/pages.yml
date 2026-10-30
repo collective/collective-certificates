@@ -1,0 +1,49 @@
+name: GitHub Pages
+
+# Publishes the documentation at the site root and Storybook under storybook/,
+# as one Pages deployment. The repository's Pages source must be set to
+# "GitHub Actions".
+
+on:
+  workflow_call:
+    inputs:
+      docs-artifact-name:
+        required: true
+        type: string
+      storybook-artifact-name:
+        required: true
+        type: string
+
+jobs:
+
+  deploy:
+    name: "Deploy to GitHub Pages"
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Download documentation
+        uses: actions/download-artifact@v8
+        with:
+          name: ${{ inputs.docs-artifact-name }}
+          path: site
+
+      - name: Download Storybook
+        uses: actions/download-artifact@v8
+        with:
+          name: ${{ inputs.storybook-artifact-name }}
+          path: site/storybook
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v5
+        with:
+          path: site
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v5

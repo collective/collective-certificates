@@ -1,0 +1,15 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:plone="http://namespaces.plone.org/plone"
+    >
+
+  <plone:service
+      method="POST"
+      factory=".post.CreateCertificatesPost"
+      for="collective.certificates.content.template.ICertificateTemplate"
+      permission="cmf.ModifyPortalContent"
+      layer="collective.certificates.interfaces.IBrowserLayer"
+      name="@create-certificates"
+      />
+
+</configure>
