@@ -2,12 +2,18 @@
 <object meta_type="Plone Workflow Tool"
         name="portal_workflow"
 >
+  <object meta_type="Workflow"
+          name="certificate_template_workflow"
+  />
+  <object meta_type="Workflow"
+          name="certificate_workflow"
+  />
   <bindings>
     <type type_id="Certificate">
-      <bound-workflow workflow_id="simple_publication_workflow" />
+      <bound-workflow workflow_id="certificate_workflow" />
     </type>
     <type type_id="CertificateTemplate">
-      <bound-workflow workflow_id="simple_publication_workflow" />
+      <bound-workflow workflow_id="certificate_template_workflow" />
     </type>
   </bindings>
 </object>

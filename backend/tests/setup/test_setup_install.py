@@ -51,13 +51,18 @@ class TestSetupInstall:
         """Every vocabulary is registered."""
         assert queryUtility(IVocabularyFactory, name=name) is not None
 
-    def test_workflow(self):
-        """Templates use the simple publication workflow."""
+    @pytest.mark.parametrize(
+        "portal_type,workflow",
+        [
+            ("Certificate", "certificate_workflow"),
+            ("CertificateTemplate", "certificate_template_workflow"),
+        ],
+    )
+    def test_workflow(self, portal_type: str, workflow: str):
+        """Each type has its own single-state workflow."""
         wftool = api.portal.get_tool("portal_workflow")
-        for portal_type in ("Certificate", "CertificateTemplate"):
-            assert wftool.getChainForPortalType(portal_type) == (
-                "simple_publication_workflow",
-            )
+        assert wftool.getChainForPortalType(portal_type) == (workflow,)
+        assert len(wftool[workflow].states) == 1
 
     def test_font_view(self):
         """The font view is registered on the site root."""
