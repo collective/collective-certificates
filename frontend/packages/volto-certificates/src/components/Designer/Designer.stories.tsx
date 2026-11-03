@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
+import { RealStoreWrapper as Wrapper } from '@plone/volto/storybook';
 import Designer from './Designer';
 import {
   STORY_BACKGROUND,
@@ -13,6 +14,8 @@ import {
 const meta: Meta<typeof Designer> = {
   title: 'Certificates/Designer',
   component: Designer,
+  // Volto's widgets in the properties panel read the store.
+  decorators: [(Story) => <Wrapper>{Story()}</Wrapper>],
   args: {
     blueprint: STORY_BLUEPRINT,
     templateUrl: null,

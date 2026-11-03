@@ -19,7 +19,10 @@
   color: var(--certificate-text);
   inset: 0;
 
-  button {
+  // The designer's own buttons; the properties panel uses Volto's widgets
+  // and keeps Volto's styles.
+  .certificate-elements button,
+  .certificate-banner button {
     padding: 0.35rem 0.7rem;
     border: 1px solid var(--certificate-border);
     border-radius: 4px;
@@ -31,34 +34,11 @@
       cursor: default;
       opacity: 0.5;
     }
-
-    &.primary {
-      border-color: var(--certificate-accent);
-      background: var(--certificate-accent);
-      color: #ffffff;
-    }
-
-    &:focus-visible {
-      outline: 2px solid var(--certificate-accent);
-      outline-offset: 1px;
-    }
   }
 
-  label {
-    display: block;
-    margin-top: 0.5rem;
-    font-weight: 600;
-  }
-
-  input[type='text'],
-  input[type='number'],
-  select,
-  textarea {
-    width: 100%;
-    padding: 0.3rem 0.4rem;
-    border: 1px solid var(--certificate-border);
-    border-radius: 4px;
-    font: inherit;
+  button:focus-visible {
+    outline: 2px solid var(--certificate-accent);
+    outline-offset: 1px;
   }
 
   h3 {
@@ -70,7 +50,8 @@
 .certificate-toolbar {
   display: flex;
   flex-wrap: wrap;
-  padding: var(--certificate-gap);
+  align-items: center;
+  padding: 0.25rem var(--certificate-gap);
   border-bottom: 1px solid var(--certificate-border);
   background: var(--certificate-panel-bg);
   gap: var(--certificate-gap);
@@ -79,11 +60,53 @@
 .certificate-toolbar-group {
   display: flex;
   align-items: center;
-  gap: 0.35rem;
+  gap: 0.125rem;
 
-  .certificate-checkbox {
-    margin: 0 0 0 0.5rem;
+  & + & {
+    padding-left: var(--certificate-gap);
+    border-left: 1px solid var(--certificate-border);
   }
+}
+
+// Icon buttons, as in Volto's toolbar and in volto-image-editor.
+.certificate-tool {
+  display: inline-flex;
+  width: 2.5rem;
+  height: 2.5rem;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  border: 0;
+  border-radius: 4px;
+  background: transparent;
+  color: var(--certificate-accent);
+  cursor: pointer;
+
+  &:hover:not(:disabled) {
+    background: var(--certificate-bg);
+  }
+
+  &[aria-pressed='false'] {
+    color: var(--certificate-muted);
+  }
+
+  &:disabled {
+    color: var(--certificate-muted);
+    cursor: default;
+    opacity: 0.4;
+  }
+
+  &.primary:not(:disabled) {
+    background: var(--certificate-accent);
+    color: #ffffff;
+  }
+}
+
+.certificate-zoom {
+  min-width: 5.5rem;
+  color: var(--certificate-muted);
+  font-size: 0.9em;
+  text-align: center;
 }
 
 .certificate-toolbar-end {
@@ -108,7 +131,8 @@
   display: grid;
   min-height: 0;
   flex: 1;
-  grid-template-columns: 16rem 1fr 20rem;
+  // The side panel is as wide as Volto's sidebar, which its widgets suit.
+  grid-template-columns: 16rem 1fr 375px;
 }
 
 .certificate-elements,
@@ -148,7 +172,12 @@
 }
 
 .certificate-designer-side {
+  padding: 0;
   border-left: 1px solid var(--certificate-border);
+
+  .certificate-preview {
+    padding: var(--certificate-gap);
+  }
 }
 
 .certificate-designer-main {
@@ -208,46 +237,46 @@
   margin-top: var(--certificate-gap);
 }
 
-.certificate-color-inputs,
-.certificate-field-picker {
+.certificate-properties {
+  .header.pulled {
+    display: flex;
+    min-height: 3rem;
+    align-items: center;
+    padding: 0 1rem;
+    border-bottom: 1px solid var(--certificate-border);
+
+    h2 {
+      margin: 0;
+      font-size: 1rem;
+    }
+  }
+
+  // Volto's sidebar styles the segments only inside `.sidebar-container`.
+  .ui.segment {
+    border-width: 0 0 1px;
+    border-radius: 0;
+    margin: 0;
+    box-shadow: none;
+  }
+}
+
+.certificate-color-inputs {
   display: flex;
   align-items: center;
   gap: 0.35rem;
-}
 
-.certificate-field-picker label {
-  margin: 0;
-  white-space: nowrap;
-}
-
-.certificate-anchor-field fieldset {
-  display: flex;
-  padding: 0;
-  border: 0;
-  margin: 0.5rem 0 0;
-  gap: 0.5rem;
-
-  legend {
-    font-weight: 600;
+  input[type='color'] {
+    width: 2.5rem;
+    height: 2.25rem;
+    flex: none;
+    padding: 0;
+    border: 1px solid var(--certificate-border);
+    background: none;
+    cursor: pointer;
   }
-
-  label {
-    margin: 0;
-    font-weight: normal;
-  }
-}
-
-.certificate-checkbox {
-  font-weight: normal;
 }
 
 .certificate-preview img {
   width: 100%;
   border: 1px solid var(--certificate-border);
-}
-
-.certificate-property-hint {
-  margin: 0.25rem 0 0.5rem;
-  color: #5c6370;
-  font-size: 0.9em;
 }

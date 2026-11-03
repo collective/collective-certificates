@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useIntl } from 'react-intl';
+import { FormFieldWrapper } from '../../../helpers/widgets';
 import messages from '../../../messages';
 
 const COLOR = /^#[0-9a-f]{6}$/;
@@ -14,6 +15,9 @@ export interface ColorFieldProps {
 /**
  * A color picker beside a text input, for those who type colors or cannot
  * use the picker. Only valid `#rrggbb` values reach `onChange`.
+ *
+ * Volto's color widget offers a fixed palette; a certificate takes any
+ * color, so this field wraps the two inputs in Volto's field layout.
  */
 export default function ColorField({
   id,
@@ -31,8 +35,12 @@ export default function ColorField({
     if (COLOR.test(normalized)) onChange(normalized);
   };
   return (
-    <div className="certificate-color-field">
-      <label htmlFor={`${id}-text`}>{label}</label>
+    <FormFieldWrapper
+      id={id}
+      title={label}
+      className="certificate-color-field"
+      error={invalid ? [intl.formatMessage(messages.colorInvalid)] : []}
+    >
       <div className="certificate-color-inputs">
         <input
           type="color"
@@ -41,20 +49,14 @@ export default function ColorField({
           onChange={(event) => commit(event.target.value)}
         />
         <input
-          id={`${id}-text`}
+          id={`field-${id}`}
           type="text"
           value={text}
           maxLength={7}
           aria-invalid={invalid ? 'true' : undefined}
-          aria-describedby={invalid ? `${id}-error` : undefined}
           onChange={(event) => commit(event.target.value)}
         />
       </div>
-      {invalid && (
-        <p id={`${id}-error`} className="certificate-field-error">
-          {intl.formatMessage(messages.colorInvalid)}
-        </p>
-      )}
-    </div>
+    </FormFieldWrapper>
   );
 }

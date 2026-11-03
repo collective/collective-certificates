@@ -1,5 +1,9 @@
 import { useIntl } from 'react-intl';
+import alignCenterSVG from '@plone/volto/icons/align-center.svg';
+import alignLeftSVG from '@plone/volto/icons/align-left.svg';
+import alignRightSVG from '@plone/volto/icons/align-right.svg';
 import { ANCHORS, BASELINES } from '../../../blueprint/model';
+import { ButtonsWidget, SelectWidget } from '../../../helpers/widgets';
 import messages from '../../../messages';
 import type { Anchor, Baseline } from '../../../blueprint/model';
 
@@ -14,6 +18,12 @@ const ANCHOR_LABELS = {
   start: messages.anchorStart,
   middle: messages.anchorMiddle,
   end: messages.anchorEnd,
+};
+
+const ANCHOR_ICONS = {
+  start: alignLeftSVG,
+  middle: alignCenterSVG,
+  end: alignRightSVG,
 };
 
 const BASELINE_LABELS = {
@@ -31,38 +41,36 @@ export default function AnchorField({
 }: AnchorFieldProps) {
   const intl = useIntl();
   return (
-    <div className="certificate-anchor-field">
-      <fieldset>
-        <legend>{intl.formatMessage(messages.anchor)}</legend>
-        {ANCHORS.map((value) => (
-          <label key={value}>
-            <input
-              type="radio"
-              name={`${id}-anchor`}
-              value={value}
-              checked={anchor === value}
-              onChange={() => onChange({ anchor: value })}
-            />
-            {intl.formatMessage(ANCHOR_LABELS[value])}
-          </label>
-        ))}
-      </fieldset>
-      <label htmlFor={`${id}-baseline`}>
-        {intl.formatMessage(messages.baseline)}
-      </label>
-      <select
-        id={`${id}-baseline`}
-        value={baseline}
-        onChange={(event) =>
-          onChange({ baseline: event.target.value as Baseline })
+    <>
+      <ButtonsWidget
+        id={`${id}-anchor`}
+        title={intl.formatMessage(messages.anchor)}
+        value={anchor}
+        actions={[...ANCHORS]}
+        actionsInfoMap={Object.fromEntries(
+          ANCHORS.map((value) => [
+            value,
+            [ANCHOR_ICONS[value], intl.formatMessage(ANCHOR_LABELS[value])],
+          ]),
+        )}
+        onChange={(_id, value) =>
+          value && onChange({ anchor: value as Anchor })
         }
-      >
-        {BASELINES.map((value) => (
-          <option key={value} value={value}>
-            {intl.formatMessage(BASELINE_LABELS[value])}
-          </option>
-        ))}
-      </select>
-    </div>
+      />
+      <SelectWidget
+        id={`${id}-baseline`}
+        title={intl.formatMessage(messages.baseline)}
+        value={baseline}
+        choices={BASELINES.map((value) => [
+          value,
+          intl.formatMessage(BASELINE_LABELS[value]),
+        ])}
+        required
+        noValueOption={false}
+        onChange={(_id, value) =>
+          value && onChange({ baseline: value as Baseline })
+        }
+      />
+    </>
   );
 }

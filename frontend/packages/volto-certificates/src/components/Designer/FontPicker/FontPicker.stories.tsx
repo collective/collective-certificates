@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
+import { RealStoreWrapper as Wrapper } from '@plone/volto/storybook';
 import FontPicker from './FontPicker';
 
 const FONTS = [
@@ -11,6 +12,16 @@ const FONTS = [
 const meta: Meta<typeof FontPicker> = {
   title: 'Certificates/Designer/FontPicker',
   component: FontPicker,
+  // Volto's widgets read the store, and take their styles from a form.
+  decorators: [
+    (Story) => (
+      <Wrapper>
+        <div className="ui form" style={{ width: '375px' }}>
+          {Story()}
+        </div>
+      </Wrapper>
+    ),
+  ],
 };
 
 export default meta;

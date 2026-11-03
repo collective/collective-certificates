@@ -1,6 +1,6 @@
-import { useState } from 'react';
 import { useIntl } from 'react-intl';
 import { placeholderFor } from '../../../helpers/text';
+import { SelectWidget } from '../../../helpers/widgets';
 import messages from '../../../messages';
 import type { Term } from '../../../reducers/certificates';
 
@@ -12,7 +12,10 @@ export interface FieldPickerProps {
   onInsert: (placeholder: string) => void;
 }
 
-/** Choose a field and insert its placeholder; date fields also offer `|date`. */
+/**
+ * Choosing a field inserts its placeholder; date fields also offer `|date`.
+ * The select keeps no value, so the same field can be inserted again.
+ */
 export default function FieldPicker({
   id,
   fields,
@@ -20,42 +23,27 @@ export default function FieldPicker({
   onInsert,
 }: FieldPickerProps) {
   const intl = useIntl();
-  const options = fields.flatMap(({ token, title }) => {
-    const plain = { value: placeholderFor(token), label: title };
+  const choices = fields.flatMap(({ token, title }): [string, string][] => {
+    const plain: [string, string] = [placeholderFor(token), title];
     if (kinds[token] !== 'date') return [plain];
     return [
       plain,
-      {
-        value: placeholderFor(token, 'date'),
-        label: intl.formatMessage(messages.asDate, { title }),
-      },
+      [
+        placeholderFor(token, 'date'),
+        intl.formatMessage(messages.asDate, { title }),
+      ],
     ];
   });
-  const [choice, setChoice] = useState(options[0]?.value ?? '');
-  const current = options.some((option) => option.value === choice)
-    ? choice
-    : options[0]?.value ?? '';
   return (
-    <div className="certificate-field-picker">
-      <label htmlFor={id}>{intl.formatMessage(messages.insertField)}</label>
-      <select
-        id={id}
-        value={current}
-        onChange={(event) => setChoice(event.target.value)}
-      >
-        {options.map((option) => (
-          <option key={option.value} value={option.value}>
-            {option.label}
-          </option>
-        ))}
-      </select>
-      <button
-        type="button"
-        disabled={!current}
-        onClick={() => onInsert(current)}
-      >
-        {intl.formatMessage(messages.insert)}
-      </button>
-    </div>
+    <SelectWidget
+      id={id}
+      title={intl.formatMessage(messages.insertField)}
+      value={null}
+      choices={choices}
+      noValueOption={false}
+      isDisabled={choices.length === 0}
+      placeholder={intl.formatMessage(messages.insert)}
+      onChange={(_id, placeholder) => placeholder && onInsert(placeholder)}
+    />
   );
 }
