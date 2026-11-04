@@ -35,7 +35,7 @@ export type DesignerAction =
   | { type: 'duplicate'; id: string }
   | { type: 'move'; id: string; x: number; y: number }
   | { type: 'nudge'; id: string; dx: number; dy: number }
-  | { type: 'reorder'; id: string; step: -1 | 1 }
+  | { type: 'reorder'; id: string; target: string }
   | { type: 'fitPage'; width: number; height: number }
   | { type: 'undo' }
   | { type: 'redo' }
@@ -109,7 +109,7 @@ export function designerReducer(
         nudgeElement(blueprint, action.id, action.dx, action.dy),
       );
     case 'reorder':
-      return change(state, reorderElement(blueprint, action.id, action.step));
+      return change(state, reorderElement(blueprint, action.id, action.target));
     case 'fitPage':
       return change(
         state,

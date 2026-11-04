@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
+import { RealStoreWrapper as Wrapper } from '@plone/volto/storybook';
 import FieldPicker from './FieldPicker';
 
 const FIELDS = [
@@ -16,6 +17,16 @@ const KINDS = {
 const meta: Meta<typeof FieldPicker> = {
   title: 'Certificates/Designer/FieldPicker',
   component: FieldPicker,
+  // Volto's widgets read the store, and take their styles from a form.
+  decorators: [
+    (Story) => (
+      <Wrapper>
+        <div className="ui form" style={{ width: '375px' }}>
+          {Story()}
+        </div>
+      </Wrapper>
+    ),
+  ],
 };
 
 export default meta;

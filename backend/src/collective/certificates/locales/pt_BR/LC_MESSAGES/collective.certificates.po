@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2026-10-30 04:27+0000\n"
+"POT-Creation-Date: 2026-11-03 21:04+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,6 +17,14 @@ msgstr ""
 #: collective/certificates/profiles/default/types/CertificateTemplate.xml
 msgid "A certificate layout over a background image."
 msgstr "Um modelo de certificado sobre uma imagem de fundo."
+
+#: collective/certificates/profiles/default/workflows/certificate_template_workflow/definition.xml
+msgid "A single state for certificate templates: only the people who manage them can view, list or edit them."
+msgstr "Um único estado para modelos de certificado: só quem os gerencia pode vê-los, listá-los ou editá-los."
+
+#: collective/certificates/profiles/default/workflows/certificate_workflow/definition.xml
+msgid "A single state for issued certificates: anyone with the address can view one, and the catalog lists them only to Managers."
+msgstr "Um único estado para certificados emitidos: qualquer pessoa com o endereço pode ver um certificado, e o catálogo os lista apenas para Gerentes."
 
 #: collective/certificates/profiles/default/types/Certificate.xml
 msgid "An issued certificate, rendered from a certificate template."
@@ -42,6 +50,14 @@ msgstr "Certificado"
 msgid "Certificate Template"
 msgstr "Modelo de Certificado"
 
+#: collective/certificates/profiles/default/workflows/certificate_template_workflow/definition.xml
+msgid "Certificate template workflow"
+msgstr "Fluxo de trabalho de modelos de certificado"
+
+#: collective/certificates/profiles/default/workflows/certificate_workflow/definition.xml
+msgid "Certificate workflow"
+msgstr "Fluxo de trabalho de certificados"
+
 #: collective/certificates/profiles.zcml:22
 msgid "Create example content to showcase this addon."
 msgstr "Cria conteúdo de exemplo para demonstrar este complemento."
@@ -55,6 +71,14 @@ msgstr "Editar"
 msgid "Generate and store participation certificates for events."
 msgstr "Gera e armazena certificados de participação em eventos."
 
+#: collective/certificates/profiles/default/workflows/certificate_template_workflow/definition.xml
+msgid "Internal"
+msgstr "Interno"
+
+#: collective/certificates/profiles/default/workflows/certificate_workflow/definition.xml
+msgid "Issued"
+msgstr "Emitido"
+
 #: collective/certificates/profiles.zcml:30
 msgid "Uninstall Attendance Certificates for Plone setup."
 msgstr "Desinstala a configuração dos Certificados de Participação para Plone."
@@ -63,6 +87,14 @@ msgstr "Desinstala a configuração dos Certificados de Participação para Plon
 #: collective/certificates/profiles/default/types/CertificateTemplate.xml
 msgid "View"
 msgstr "Visualizar"
+
+#: collective/certificates/profiles/default/workflows/certificate_workflow/definition.xml
+msgid "Viewable by anyone who has its address; listed only to Managers."
+msgstr "Visível para qualquer pessoa que tenha o endereço; listado apenas para Gerentes."
+
+#: collective/certificates/profiles/default/workflows/certificate_template_workflow/definition.xml
+msgid "Visible to the people who manage certificate templates, never to anonymous users."
+msgstr "Visível para quem gerencia modelos de certificado, nunca para usuários anônimos."
 
 #. Default: "You cannot add certificates to ${path}."
 #: collective/certificates/api/batch.py:227

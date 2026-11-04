@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
+import { RealStoreWrapper as Wrapper } from '@plone/volto/storybook';
 import { reorderElement } from '../../../blueprint/ops';
 import { STORY_BLUEPRINT } from '../storyData';
 import ElementsList from './ElementsList';
@@ -8,6 +9,14 @@ import type { Blueprint } from '../../../blueprint/model';
 const meta: Meta<typeof ElementsList> = {
   title: 'Certificates/Designer/ElementsList',
   component: ElementsList,
+  // The drag library is one of Volto's lazy libraries, loaded through the store.
+  decorators: [
+    (Story) => (
+      <Wrapper>
+        <div style={{ width: '16rem' }}>{Story()}</div>
+      </Wrapper>
+    ),
+  ],
 };
 
 export default meta;
@@ -22,8 +31,8 @@ function Controlled({ initial }: { initial: Blueprint }) {
       elements={blueprint.elements}
       selection={selection}
       onSelect={setSelection}
-      onReorder={(id, step) =>
-        setBlueprint(reorderElement(blueprint, id, step))
+      onReorder={(id, target) =>
+        setBlueprint(reorderElement(blueprint, id, target))
       }
     />
   );

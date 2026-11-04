@@ -203,6 +203,11 @@ msgstr ""
 msgid "certificates.elementsCount"
 msgstr ""
 
+#. Default: "Drag to reorder. Later elements are drawn on top."
+#: messages
+msgid "certificates.elementsOrder"
+msgstr ""
+
 #. Default: "Error correction"
 #: messages
 msgid "certificates.errorCorrection"
@@ -313,14 +318,9 @@ msgstr ""
 msgid "certificates.maxWidth"
 msgstr ""
 
-#. Default: "Move {id} back"
+#. Default: "Move {id}"
 #: messages
-msgid "certificates.moveBack"
-msgstr ""
-
-#. Default: "Move {id} forward"
-#: messages
-msgid "certificates.moveForward"
+msgid "certificates.moveElement"
 msgstr ""
 
 #. Default: "No certificates were created."
@@ -381,6 +381,26 @@ msgstr ""
 #. Default: "Sample data"
 #: messages
 msgid "certificates.sampleData"
+msgstr ""
+
+#. Default: "Edit sample data"
+#: messages
+msgid "certificates.sampleEdit"
+msgstr ""
+
+#. Default: "Field"
+#: messages
+msgid "certificates.sampleField"
+msgstr ""
+
+#. Default: "Not set: the preview prints the field name"
+#: messages
+msgid "certificates.sampleUnset"
+msgstr ""
+
+#. Default: "Value"
+#: messages
+msgid "certificates.sampleValue"
 msgstr ""
 
 #. Default: "Select an element to edit it."

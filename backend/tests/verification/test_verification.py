@@ -23,10 +23,10 @@ class TestFindCertificate:
     def test_found(self):
         assert find_certificate(self.uid) == self.certificate
 
-    def test_private_found_anonymously(self):
-        """Holding the UID is enough, whatever the workflow state."""
-        assert api.content.get_state(self.certificate) == "private"
+    def test_unlisted_found_anonymously(self):
+        """Holding the UID is enough, though the catalog lists it to no one."""
         logout()
+        assert len(api.content.find(UID=self.uid)) == 0
         assert find_certificate(self.uid).getId() == self.certificate.getId()
 
     @pytest.mark.parametrize(

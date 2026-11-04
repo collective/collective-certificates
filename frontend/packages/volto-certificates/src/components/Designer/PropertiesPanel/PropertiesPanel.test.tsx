@@ -1,19 +1,30 @@
 import { fireEvent, screen } from '@testing-library/react';
 import { useState } from 'react';
-import { describe, expect, it, vi } from 'vitest';
+import { beforeAll, describe, expect, it, vi } from 'vitest';
 import {
   findElement,
   renameElement,
   updateElement,
 } from '../../../blueprint/ops';
 import { BLUEPRINTS, FIELD_KINDS } from '../../../testing/fixtures';
-import { FIELDS, FONTS, LEVELS, renderWith } from '../../../testing/render';
+import {
+  choose,
+  FIELDS,
+  FONTS,
+  LEVELS,
+  loadSelect,
+  openMenu,
+  renderWith,
+} from '../../../testing/render';
 import PropertiesPanel from './PropertiesPanel';
 import type {
   Blueprint,
   Element,
   ImageElement,
 } from '../../../blueprint/model';
+
+vi.mock('@plone/volto/helpers/Loadable/Loadable');
+beforeAll(loadSelect);
 
 const every = BLUEPRINTS['every-element'];
 
@@ -70,7 +81,12 @@ const setup = (id: string) => {
 };
 
 const change = (label: string, value: string) =>
-  fireEvent.change(screen.getByLabelText(label), { target: { value } });
+  fireEvent.change(
+    screen.getByLabelText(label, { selector: 'input,textarea' }),
+    {
+      target: { value },
+    },
+  );
 
 describe('PropertiesPanel', () => {
   it('asks for a selection when there is none', () => {
@@ -90,15 +106,42 @@ describe('PropertiesPanel', () => {
     expect(screen.getByText('Select an element to edit it.')).toBeTruthy();
   });
 
-  it('round-trips the text fields', () => {
+  it('uses Volto widgets, in a sidebar form', () => {
+    const { container } = renderWith(
+      <PropertiesPanel
+        element={findElement(every, 'start') ?? null}
+        blueprint={every}
+        fonts={FONTS}
+        fields={FIELDS}
+        kinds={FIELD_KINDS}
+        errorCorrections={LEVELS}
+        assets={ASSETS}
+        onChange={vi.fn()}
+        onRename={vi.fn()}
+      />,
+    );
+    expect(container.querySelector('.ui.form .header.pulled h2')).toBeTruthy();
+    for (const id of ['id', 'x', 'y', 'size', 'font', 'shrink'])
+      expect(
+        container.querySelector(
+          `.field.field-wrapper-certificate-property-${id}`,
+        ),
+      ).toBeTruthy();
+    expect(container.querySelector('.buttons-widget')).toBeTruthy();
+    expect(container.querySelectorAll('.react-select-container')).toHaveLength(
+      3,
+    );
+  });
+
+  it('round-trips the text fields', async () => {
     const { last } = setup('start');
     change('X', '120');
     change('Y', '130');
     change('Size', '44');
-    change('Font', 'caveat');
+    await choose('Font', 'Caveat');
     change('Content', 'Hello');
     fireEvent.click(screen.getByLabelText('End'));
-    change('Vertical position', 'hanging');
+    await choose('Vertical position', 'Hanging');
     change('Maximum width', '900');
     fireEvent.click(screen.getByLabelText('Shrink to fit the maximum width'));
     expect(last()).toMatchObject({
@@ -116,13 +159,14 @@ describe('PropertiesPanel', () => {
     expect('max_width' in last()).toBe(false);
   });
 
-  it('inserts a field at the cursor', () => {
+  it('inserts a field at the cursor', async () => {
     const { last } = setup('start');
-    const content = screen.getByLabelText('Content') as HTMLTextAreaElement;
+    const content = screen.getByLabelText('Content', {
+      selector: 'textarea',
+    }) as HTMLTextAreaElement;
     change('Content', 'Dear , welcome');
     content.setSelectionRange(5, 5);
-    change('Insert field', '{{ full_name }}');
-    fireEvent.click(screen.getByText('Insert'));
+    await choose('Insert field', 'full name');
     expect(last()).toMatchObject({ content: 'Dear {{ full_name }}, welcome' });
   });
 
@@ -147,18 +191,24 @@ describe('PropertiesPanel', () => {
     expect(last().id).toBe('opening');
   });
 
-  it('keeps an image proportional unless unlocked', () => {
+  it('keeps an empty id to itself', () => {
+    const { onBlueprint } = setup('start');
+    change('Identifier', '');
+    expect(onBlueprint).not.toHaveBeenCalled();
+  });
+
+  it('keeps an image proportional unless unlocked', async () => {
     const { last } = setup('logo');
     change('Width', '350');
     expect(last()).toMatchObject({ width: 350, height: 250 });
     fireEvent.click(screen.getByLabelText('Keep proportions'));
     change('Height', '100');
     expect(last()).toMatchObject({ width: 350, height: 100 });
-    change('Image', 'signature');
+    await choose('Image', 'Signature');
     expect(last()).toMatchObject({ asset: 'signature' });
   });
 
-  it('lists the images it is given, and shows a missing one', () => {
+  it('lists the images it is given, and shows a missing one', async () => {
     const image = findElement(every, 'logo') as ImageElement;
     renderWith(
       <PropertiesPanel
@@ -173,12 +223,8 @@ describe('PropertiesPanel', () => {
         onRename={vi.fn()}
       />,
     );
-    const options = screen
-      .getAllByRole('option')
-      .map((option) => option.textContent);
-    expect(options).toEqual(
-      expect.arrayContaining(['Background', 'Signature', 'gone (missing)']),
-    );
+    const options = (await openMenu('Image')).map((o) => o.textContent);
+    expect(options).toEqual(['Background', 'Signature', 'gone (missing)']);
     expect(screen.queryByText(/add it as an image inside/)).toBeNull();
   });
 
@@ -205,10 +251,13 @@ describe('PropertiesPanel', () => {
     expect(last()).toMatchObject({ width: 350, height: 250 });
   });
 
-  it('edits a QR code', () => {
+  it('edits a QR code', async () => {
     const { last } = setup('qr');
     change('Size', '300');
-    change('Error correction', 'H');
+    expect(
+      (await openMenu('Error correction')).map((o) => o.textContent),
+    ).toContain('Level H');
+    await choose('Error correction', 'Level H');
     fireEvent.change(
       screen.getByLabelText('Foreground', { selector: 'input[type=text]' }),
       { target: { value: '#112233' } },
@@ -225,12 +274,9 @@ describe('PropertiesPanel', () => {
       bg: '#ffeedd',
       content: '{{ verification_url }}',
     });
-    expect(screen.getAllByRole('option').map((o) => o.textContent)).toContain(
-      'Level H',
-    );
   });
 
-  it('falls back to the plain levels without the vocabulary', () => {
+  it('falls back to the plain levels without the vocabulary', async () => {
     const qr = findElement(every, 'qr') ?? null;
     renderWith(
       <PropertiesPanel
@@ -245,9 +291,8 @@ describe('PropertiesPanel', () => {
         onRename={vi.fn()}
       />,
     );
-    const select = screen.getByLabelText('Error correction');
     expect(
-      Array.from(select.querySelectorAll('option')).map((o) => o.textContent),
+      (await openMenu('Error correction')).map((o) => o.textContent),
     ).toEqual(['L', 'M', 'Q', 'H']);
   });
 });

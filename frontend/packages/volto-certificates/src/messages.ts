@@ -52,10 +52,20 @@ const messages = defineMessages({
     id: 'certificates.noElements',
     defaultMessage: 'No elements yet. Add one from the toolbar.',
   },
-  moveBack: { id: 'certificates.moveBack', defaultMessage: 'Move {id} back' },
-  moveForward: {
-    id: 'certificates.moveForward',
-    defaultMessage: 'Move {id} forward',
+  moveElement: { id: 'certificates.moveElement', defaultMessage: 'Move {id}' },
+  elementsOrder: {
+    id: 'certificates.elementsOrder',
+    defaultMessage: 'Drag to reorder. Later elements are drawn on top.',
+  },
+  sampleField: { id: 'certificates.sampleField', defaultMessage: 'Field' },
+  sampleValue: { id: 'certificates.sampleValue', defaultMessage: 'Value' },
+  sampleEdit: {
+    id: 'certificates.sampleEdit',
+    defaultMessage: 'Edit sample data',
+  },
+  sampleUnset: {
+    id: 'certificates.sampleUnset',
+    defaultMessage: 'Not set: the preview prints the field name',
   },
   selected: { id: 'certificates.selected', defaultMessage: 'Selected: {id}' },
   nothingSelected: {

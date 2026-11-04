@@ -9,7 +9,7 @@ describe('ColorField', () => {
     renderWith(
       <ColorField id="c" label="Color" value="#000000" onChange={onChange} />,
     );
-    fireEvent.change(screen.getByLabelText('Color', { selector: '#c-text' }), {
+    fireEvent.change(screen.getByLabelText('Color', { selector: '#field-c' }), {
       target: { value: '#A1B2C3' },
     });
     expect(onChange).toHaveBeenCalledWith('#a1b2c3');
@@ -20,7 +20,7 @@ describe('ColorField', () => {
     renderWith(
       <ColorField id="c" label="Color" value="#000000" onChange={onChange} />,
     );
-    const input = screen.getByLabelText('Color', { selector: '#c-text' });
+    const input = screen.getByLabelText('Color', { selector: '#field-c' });
     fireEvent.change(input, { target: { value: '#12' } });
     expect(onChange).not.toHaveBeenCalled();
     expect(input.getAttribute('aria-invalid')).toBe('true');
