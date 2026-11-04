@@ -201,6 +201,11 @@ msgstr "Elementos"
 msgid "certificates.elementsCount"
 msgstr "{count, plural, =0 {Nenhum elemento} one {# elemento} other {# elementos}}"
 
+#. Default: "Drag to reorder. Later elements are drawn on top."
+#: messages
+msgid "certificates.elementsOrder"
+msgstr "Arraste para reordenar. Os elementos posteriores são desenhados por cima."
+
 #. Default: "Error correction"
 #: messages
 msgid "certificates.errorCorrection"
@@ -311,15 +316,10 @@ msgstr "Manter proporções"
 msgid "certificates.maxWidth"
 msgstr "Largura máxima"
 
-#. Default: "Move {id} back"
+#. Default: "Move {id}"
 #: messages
-msgid "certificates.moveBack"
-msgstr "Mover {id} para trás"
-
-#. Default: "Move {id} forward"
-#: messages
-msgid "certificates.moveForward"
-msgstr "Mover {id} para a frente"
+msgid "certificates.moveElement"
+msgstr "Mover {id}"
 
 #. Default: "No certificates were created."
 #: messages
@@ -380,6 +380,26 @@ msgstr "Refazer"
 #: messages
 msgid "certificates.sampleData"
 msgstr "Dados de exemplo"
+
+#. Default: "Edit sample data"
+#: messages
+msgid "certificates.sampleEdit"
+msgstr "Editar dados de exemplo"
+
+#. Default: "Field"
+#: messages
+msgid "certificates.sampleField"
+msgstr "Campo"
+
+#. Default: "Not set: the preview prints the field name"
+#: messages
+msgid "certificates.sampleUnset"
+msgstr "Não definido: a prévia mostra o nome do campo"
+
+#. Default: "Value"
+#: messages
+msgid "certificates.sampleValue"
+msgstr "Valor"
 
 #. Default: "Select an element to edit it."
 #: messages

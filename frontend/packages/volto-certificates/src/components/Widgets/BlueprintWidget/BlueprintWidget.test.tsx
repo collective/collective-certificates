@@ -1,13 +1,22 @@
 import { fireEvent, screen, waitFor } from '@testing-library/react';
-import { describe, expect, it, vi } from 'vitest';
+import { beforeAll, describe, expect, it, vi } from 'vitest';
 import { VALIDATE_BLUEPRINT } from '../../../actions/certificates';
 import { emptyBlueprint } from '../../../blueprint/model';
 import { BLUEPRINTS } from '../../../testing/fixtures';
-import { LOADED, fakeStore, renderWith } from '../../../testing/render';
+import {
+  LOADED,
+  fakeStore,
+  loadSelect,
+  renderWith,
+} from '../../../testing/render';
 import BlueprintWidget from './BlueprintWidget';
 import type { BlueprintWidgetProps, TemplateFormData } from './BlueprintWidget';
 
 vi.mock('react-moveable', () => ({ default: () => null }));
+// The designer's lists and selects take Volto's lazy libraries from the
+// mock, rather than dispatching their load to the store each test fakes.
+vi.mock('@plone/volto/helpers/Loadable/Loadable');
+beforeAll(loadSelect);
 
 const minimal = BLUEPRINTS.minimal;
 
