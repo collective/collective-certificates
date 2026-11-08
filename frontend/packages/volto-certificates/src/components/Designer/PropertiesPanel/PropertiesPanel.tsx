@@ -1,8 +1,16 @@
 import { useEffect, useRef, useState } from 'react';
 import { useIntl } from 'react-intl';
+import { Segment } from 'semantic-ui-react';
 import { ERROR_CORRECTIONS } from '../../../blueprint/model';
 import { idProblem } from '../../../blueprint/ops';
 import { insertAt } from '../../../helpers/text';
+import {
+  CheckboxWidget,
+  FormFieldWrapper,
+  NumberWidget,
+  SelectWidget,
+  TextWidget,
+} from '../../../helpers/widgets';
 import messages from '../../../messages';
 import AnchorField from '../AnchorField/AnchorField';
 import ColorField from '../ColorField/ColorField';
@@ -45,7 +53,7 @@ interface NumberFieldProps {
   optional?: boolean;
 }
 
-/** An integer input; empty clears an optional value. */
+/** An integer field; empty clears an optional value. */
 function NumberField({
   id,
   label,
@@ -55,25 +63,21 @@ function NumberField({
   optional = false,
 }: NumberFieldProps) {
   return (
-    <div className="certificate-number-field">
-      <label htmlFor={id}>{label}</label>
-      <input
-        id={id}
-        type="number"
-        step={1}
-        min={min}
-        value={value ?? ''}
-        onChange={(event) => {
-          const raw = event.target.value;
-          if (raw === '') {
-            if (optional) onChange(undefined);
-            return;
-          }
-          const parsed = Math.round(Number(raw));
-          if (Number.isFinite(parsed) && parsed >= min) onChange(parsed);
-        }}
-      />
-    </div>
+    <NumberWidget
+      id={id}
+      title={label}
+      value={value ?? ''}
+      minimum={min}
+      step={1}
+      onChange={(_id, raw) => {
+        if (raw === undefined || raw === '') {
+          if (optional) onChange(undefined);
+          return;
+        }
+        const parsed = Math.round(Number(raw));
+        if (Number.isFinite(parsed) && parsed >= min) onChange(parsed);
+      }}
+    />
   );
 }
 
@@ -104,16 +108,22 @@ function ContentField({
     }
   });
   return (
-    <div className="certificate-content-field">
-      <label htmlFor={id}>{intl.formatMessage(messages.content)}</label>
-      <textarea
+    <>
+      <FormFieldWrapper
         id={id}
-        ref={ref}
-        rows={3}
-        maxLength={500}
-        value={value}
-        onChange={(event) => onChange(event.target.value)}
-      />
+        title={intl.formatMessage(messages.content)}
+        className="textarea"
+      >
+        <textarea
+          id={`field-${id}`}
+          name={id}
+          ref={ref}
+          rows={3}
+          maxLength={500}
+          value={value}
+          onChange={(event) => onChange(event.target.value)}
+        />
+      </FormFieldWrapper>
       <FieldPicker
         id={`${id}-field`}
         fields={fields}
@@ -130,7 +140,7 @@ function ContentField({
           onChange(next);
         }}
       />
-    </div>
+    </>
   );
 }
 
@@ -148,34 +158,28 @@ function IdField({
   const [text, setText] = useState(element.id);
   useEffect(() => setText(element.id), [element.id]);
   const problem = idProblem(blueprint, text, element.id);
-  const inputId = `certificate-property-id`;
   return (
-    <div className="certificate-id-field">
-      <label htmlFor={inputId}>{intl.formatMessage(messages.id)}</label>
-      <input
-        id={inputId}
-        type="text"
-        value={text}
-        maxLength={32}
-        aria-invalid={problem ? 'true' : undefined}
-        aria-describedby={problem ? `${inputId}-error` : undefined}
-        onChange={(event) => {
-          setText(event.target.value);
-          if (
-            event.target.value !== element.id &&
-            !idProblem(blueprint, event.target.value, element.id)
-          )
-            onRename(event.target.value);
-        }}
-      />
-      {problem && (
-        <p id={`${inputId}-error`} className="certificate-field-error">
-          {intl.formatMessage(
-            problem === 'invalid' ? messages.idInvalid : messages.idTaken,
-          )}
-        </p>
-      )}
-    </div>
+    <TextWidget
+      id="certificate-property-id"
+      title={intl.formatMessage(messages.id)}
+      required
+      value={text}
+      error={
+        problem
+          ? [
+              intl.formatMessage(
+                problem === 'invalid' ? messages.idInvalid : messages.idTaken,
+              ),
+            ]
+          : []
+      }
+      onChange={(_id, raw) => {
+        const next = raw ?? '';
+        setText(next);
+        if (next !== element.id && !idProblem(blueprint, next, element.id))
+          onRename(next);
+      }}
+    />
   );
 }
 
@@ -235,17 +239,15 @@ function TextProperties({
         optional
         onChange={(max_width) => onChange({ max_width })}
       />
-      <label className="certificate-checkbox">
-        <input
-          type="checkbox"
-          checked={element.fit === 'shrink'}
-          disabled={element.max_width === undefined}
-          onChange={(event) =>
-            onChange({ fit: event.target.checked ? 'shrink' : undefined })
-          }
-        />
-        {intl.formatMessage(messages.shrink)}
-      </label>
+      <CheckboxWidget
+        id="certificate-property-shrink"
+        title={intl.formatMessage(messages.shrink)}
+        value={element.fit === 'shrink'}
+        isDisabled={element.max_width === undefined}
+        onChange={(_id, checked) =>
+          onChange({ fit: checked ? 'shrink' : undefined })
+        }
+      />
     </>
   );
 }
@@ -276,25 +278,20 @@ function ImageProperties({
       ];
   return (
     <>
-      <label htmlFor="certificate-property-asset">
-        {intl.formatMessage(messages.asset)}
-      </label>
-      <select
+      <SelectWidget
         id="certificate-property-asset"
+        title={intl.formatMessage(messages.asset)}
+        description={
+          assets.length < 2
+            ? intl.formatMessage(messages.addImagesHint)
+            : undefined
+        }
         value={element.asset}
-        onChange={(event) => onChange({ asset: event.target.value })}
-      >
-        {options.map((option) => (
-          <option key={option.value} value={option.value}>
-            {option.label}
-          </option>
-        ))}
-      </select>
-      {assets.length < 2 && (
-        <p className="certificate-property-hint">
-          {intl.formatMessage(messages.addImagesHint)}
-        </p>
-      )}
+        choices={options.map((option) => [option.value, option.label])}
+        required
+        noValueOption={false}
+        onChange={(_id, asset) => asset && onChange({ asset })}
+      />
       <NumberField
         id="certificate-property-width"
         label={intl.formatMessage(messages.width)}
@@ -323,14 +320,12 @@ function ImageProperties({
           )
         }
       />
-      <label className="certificate-checkbox">
-        <input
-          type="checkbox"
-          checked={locked}
-          onChange={(event) => setLocked(event.target.checked)}
-        />
-        {intl.formatMessage(messages.lockRatio)}
-      </label>
+      <CheckboxWidget
+        id="certificate-property-lock"
+        title={intl.formatMessage(messages.lockRatio)}
+        value={locked}
+        onChange={(_id, checked) => setLocked(Boolean(checked))}
+      />
     </>
   );
 }
@@ -368,22 +363,15 @@ function QrProperties({
         min={1}
         onChange={(size) => size && onChange({ size })}
       />
-      <label htmlFor="certificate-property-ec">
-        {intl.formatMessage(messages.errorCorrection)}
-      </label>
-      <select
+      <SelectWidget
         id="certificate-property-ec"
+        title={intl.formatMessage(messages.errorCorrection)}
         value={element.ec}
-        onChange={(event) =>
-          onChange({ ec: event.target.value as ErrorCorrection })
-        }
-      >
-        {levels.map((level) => (
-          <option key={level.token} value={level.token}>
-            {level.title}
-          </option>
-        ))}
-      </select>
+        choices={levels.map((level) => [level.token, level.title])}
+        required
+        noValueOption={false}
+        onChange={(_id, ec) => ec && onChange({ ec: ec as ErrorCorrection })}
+      />
       <ColorField
         id="certificate-property-fg"
         label={intl.formatMessage(messages.foreground)}
@@ -406,7 +394,10 @@ const TYPE_LABELS = {
   qrcode: messages.typeQrcode,
 };
 
-/** Edit the selected element; every type has its id and position. */
+/**
+ * Edit the selected element; every type has its id and position. The
+ * panel is laid out as a Volto block sidebar, with Volto's own widgets.
+ */
 export default function PropertiesPanel({
   element,
   blueprint,
@@ -424,60 +415,66 @@ export default function PropertiesPanel({
       className="certificate-properties"
       aria-labelledby="certificate-properties-title"
     >
-      <h3 id="certificate-properties-title">
-        {intl.formatMessage(messages.properties)}
-        {element && ` — ${intl.formatMessage(TYPE_LABELS[element.type])}`}
-      </h3>
-      {!element ? (
-        <p>{intl.formatMessage(messages.selectElement)}</p>
-      ) : (
-        <form onSubmit={(event) => event.preventDefault()}>
-          <IdField
-            element={element}
-            blueprint={blueprint}
-            onRename={onRename}
-          />
-          <NumberField
-            id="certificate-property-x"
-            label={intl.formatMessage(messages.x)}
-            value={element.x}
-            min={0}
-            onChange={(x) => x !== undefined && onChange({ x })}
-          />
-          <NumberField
-            id="certificate-property-y"
-            label={intl.formatMessage(messages.y)}
-            value={element.y}
-            min={0}
-            onChange={(y) => y !== undefined && onChange({ y })}
-          />
-          {element.type === 'text' && (
-            <TextProperties
+      <div className="ui form">
+        <header className="header pulled">
+          <h2 id="certificate-properties-title">
+            {intl.formatMessage(messages.properties)}
+            {element && ` — ${intl.formatMessage(TYPE_LABELS[element.type])}`}
+          </h2>
+        </header>
+        {!element ? (
+          <Segment className="attached">
+            <p>{intl.formatMessage(messages.selectElement)}</p>
+          </Segment>
+        ) : (
+          <Segment className="form attached">
+            <IdField
               element={element}
-              fonts={fonts}
-              fields={fields}
-              kinds={kinds}
-              onChange={onChange as (patch: Partial<TextElement>) => void}
+              blueprint={blueprint}
+              onRename={onRename}
             />
-          )}
-          {element.type === 'image' && (
-            <ImageProperties
-              element={element}
-              assets={assets}
-              onChange={onChange as (patch: Partial<ImageElement>) => void}
+            <NumberField
+              id="certificate-property-x"
+              label={intl.formatMessage(messages.x)}
+              value={element.x}
+              min={0}
+              onChange={(x) => x !== undefined && onChange({ x })}
             />
-          )}
-          {element.type === 'qrcode' && (
-            <QrProperties
-              element={element}
-              fields={fields}
-              kinds={kinds}
-              errorCorrections={errorCorrections}
-              onChange={onChange as (patch: Partial<QrElement>) => void}
+            <NumberField
+              id="certificate-property-y"
+              label={intl.formatMessage(messages.y)}
+              value={element.y}
+              min={0}
+              onChange={(y) => y !== undefined && onChange({ y })}
             />
-          )}
-        </form>
-      )}
+            {element.type === 'text' && (
+              <TextProperties
+                element={element}
+                fonts={fonts}
+                fields={fields}
+                kinds={kinds}
+                onChange={onChange as (patch: Partial<TextElement>) => void}
+              />
+            )}
+            {element.type === 'image' && (
+              <ImageProperties
+                element={element}
+                assets={assets}
+                onChange={onChange as (patch: Partial<ImageElement>) => void}
+              />
+            )}
+            {element.type === 'qrcode' && (
+              <QrProperties
+                element={element}
+                fields={fields}
+                kinds={kinds}
+                errorCorrections={errorCorrections}
+                onChange={onChange as (patch: Partial<QrElement>) => void}
+              />
+            )}
+          </Segment>
+        )}
+      </div>
     </section>
   );
 }

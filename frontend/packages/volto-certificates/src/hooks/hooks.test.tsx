@@ -52,7 +52,7 @@ describe('designerReducer', () => {
       { type: 'update', id: 'name', patch: { size: 7 } },
       { type: 'move', id: 'name', x: 10, y: 20 },
       { type: 'nudge', id: 'name', dx: 1, dy: 1 },
-      { type: 'reorder', id: 'name', step: -1 },
+      { type: 'reorder', id: 'name', target: 'certify' },
     );
     expect(state.history.past).toHaveLength(4);
     const name = present(state).elements.find((e) => e.id === 'name');

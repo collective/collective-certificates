@@ -1,12 +1,24 @@
 import { act, fireEvent, screen } from '@testing-library/react';
-import { afterEach, describe, expect, it, vi } from 'vitest';
+import { afterEach, beforeAll, describe, expect, it, vi } from 'vitest';
+import { drop } from '../../testing/dnd';
 import { BLUEPRINTS, DATA, FIELD_KINDS } from '../../testing/fixtures';
-import { FIELDS, FONTS, LEVELS, renderWith } from '../../testing/render';
+import {
+  FIELDS,
+  FONTS,
+  LEVELS,
+  loadSelect,
+  renderWith,
+} from '../../testing/render';
 import Designer from './Designer';
 import type { Blueprint } from '../../blueprint/model';
 import type { DesignerProps } from './Designer';
 
 vi.mock('react-moveable', () => ({ default: () => null }));
+vi.mock('@plone/volto/helpers/Loadable/Loadable');
+vi.mock('@dnd-kit/core', async (importOriginal) =>
+  (await import('../../testing/dnd')).keepTheDrop(await importOriginal()),
+);
+beforeAll(loadSelect);
 
 const every = BLUEPRINTS['every-element'];
 const FONT_TOKENS = [
@@ -218,7 +230,7 @@ describe('Designer', () => {
   it('reorders, duplicates and deletes from the toolbar and list', () => {
     const p = props();
     renderWith(<Designer {...p} />);
-    fireEvent.click(screen.getByLabelText('Move start back'));
+    act(() => drop.end!({ active: { id: 'start' }, over: { id: 'logo' } }));
     selectInList('end');
     fireEvent.click(screen.getByRole('button', { name: 'Duplicate' }));
     fireEvent.click(screen.getByRole('button', { name: 'Delete' }));

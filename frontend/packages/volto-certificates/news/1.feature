@@ -1,0 +1,1 @@
+Improved the certificate designer: the toolbar now uses icon buttons, the properties panel is built from Volto's own form widgets, laid out like a block sidebar, and the elements list is reordered by dragging. Choosing a field in "Insert field" now inserts it right away. The template's sample data is now shown as a table and edited in a dialog with Volto's widgets. @ericof

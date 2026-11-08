@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2026-10-30 04:27+0000\n"
+"POT-Creation-Date: 2026-11-03 21:04+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,6 +16,14 @@ msgstr ""
 
 #: collective/certificates/profiles/default/types/CertificateTemplate.xml
 msgid "A certificate layout over a background image."
+msgstr ""
+
+#: collective/certificates/profiles/default/workflows/certificate_template_workflow/definition.xml
+msgid "A single state for certificate templates: only the people who manage them can view, list or edit them."
+msgstr ""
+
+#: collective/certificates/profiles/default/workflows/certificate_workflow/definition.xml
+msgid "A single state for issued certificates: anyone with the address can view one, and the catalog lists them only to Managers."
 msgstr ""
 
 #: collective/certificates/profiles/default/types/Certificate.xml
@@ -42,6 +50,14 @@ msgstr ""
 msgid "Certificate Template"
 msgstr ""
 
+#: collective/certificates/profiles/default/workflows/certificate_template_workflow/definition.xml
+msgid "Certificate template workflow"
+msgstr ""
+
+#: collective/certificates/profiles/default/workflows/certificate_workflow/definition.xml
+msgid "Certificate workflow"
+msgstr ""
+
 #: collective/certificates/profiles.zcml:22
 msgid "Create example content to showcase this addon."
 msgstr ""
@@ -55,6 +71,14 @@ msgstr ""
 msgid "Generate and store participation certificates for events."
 msgstr ""
 
+#: collective/certificates/profiles/default/workflows/certificate_template_workflow/definition.xml
+msgid "Internal"
+msgstr ""
+
+#: collective/certificates/profiles/default/workflows/certificate_workflow/definition.xml
+msgid "Issued"
+msgstr ""
+
 #: collective/certificates/profiles.zcml:30
 msgid "Uninstall Attendance Certificates for Plone setup."
 msgstr ""
@@ -62,6 +86,14 @@ msgstr ""
 #: collective/certificates/profiles/default/types/Certificate.xml
 #: collective/certificates/profiles/default/types/CertificateTemplate.xml
 msgid "View"
+msgstr ""
+
+#: collective/certificates/profiles/default/workflows/certificate_workflow/definition.xml
+msgid "Viewable by anyone who has its address; listed only to Managers."
+msgstr ""
+
+#: collective/certificates/profiles/default/workflows/certificate_template_workflow/definition.xml
+msgid "Visible to the people who manage certificate templates, never to anonymous users."
 msgstr ""
 
 #. Default: "You cannot add certificates to ${path}."

@@ -143,7 +143,7 @@
   "layout": "view",
   "lock": {},
   "modified": "2026-10-30T00:43:32+00:00",
-  "review_state": "private",
+  "review_state": "internal",
   "sample_data": {
     "event_end_date": "2026-06-09",
     "event_name": "Star Trek: Picard",
@@ -156,12 +156,12 @@
   "type_title": "Certificate Template",
   "version": "current",
   "workflow_history": {
-    "simple_publication_workflow": [
+    "certificate_template_workflow": [
       {
         "action": null,
         "actor": "admin",
         "comments": "",
-        "review_state": "private",
+        "review_state": "internal",
         "time": "2026-10-30T00:43:32+00:00"
       }
     ]

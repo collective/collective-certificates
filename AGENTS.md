@@ -44,6 +44,8 @@ Backend (Plone):
 - Browser views: `@@certificate-file` (download by UID) and `@@certificate-font` (font files for `@font-face`).
 - Vocabularies: `collective.certificates.Fonts`, `collective.certificates.Fields`, `collective.certificates.FieldKinds`, `collective.certificates.DateFormats`, `collective.certificates.QrErrorCorrection`.
 - Date format tokens (`collective/certificates/blueprint/dateformats.py`), stored in a template's `date_format`: `day-month-year`, `month-day-year`, `iso`, `long`, `long-day-first`.
+- Workflows: `certificate_workflow` (state `issued`) for `Certificate` and `certificate_template_workflow` (state `internal`) for `CertificateTemplate`.
+  The catalog indexes a certificate for Manager only (`collective/certificates/content/indexers.py`), so anyone can view one at its address but only Managers find it in listings.
 - Add permissions: `collective.certificates.AddCertificateTemplate` and `collective.certificates.AddCertificate`.
   The install profile grants them to no role; the example content profile grants them to Manager.
 - Registry prefix `collective.certificates`, with the records `extra_font_dir` and `pdf_dpi`.

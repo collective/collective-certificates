@@ -1,0 +1,8 @@
+<configure xmlns="http://namespaces.zope.org/zope">
+
+  <adapter
+      factory=".indexers.certificate_allowed_roles_and_users"
+      name="allowedRolesAndUsers"
+      />
+
+</configure>

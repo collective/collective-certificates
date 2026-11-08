@@ -27,10 +27,8 @@ const certificates = {
   validation: { loading: false, valid: null, errors: [], error: null },
 };
 
-function Controlled() {
-  const [value, setValue] = useState<Record<string, string>>({
-    full_name: 'Patrick Stewart',
-  });
+function Controlled({ initial }: { initial: Record<string, string> }) {
+  const [value, setValue] = useState(initial);
   return (
     <Wrapper customStore={{ certificates }}>
       <div className="ui form">
@@ -46,4 +44,16 @@ function Controlled() {
   );
 }
 
-export const Default: Story = { render: () => <Controlled /> };
+export const Default: Story = {
+  render: () => (
+    <Controlled
+      initial={{
+        full_name: 'Patrick Stewart',
+        event_name: 'Starfleet Academy',
+        event_start_date: '2026-11-03',
+      }}
+    />
+  ),
+};
+
+export const Empty: Story = { render: () => <Controlled initial={{}} /> };

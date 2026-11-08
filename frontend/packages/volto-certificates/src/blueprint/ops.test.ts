@@ -91,7 +91,7 @@ describe('element operations', () => {
     removeElement(sample, 'name');
     duplicateElement(sample, 'name');
     moveElement(sample, 'name', 1, 1);
-    reorderElement(sample, 'name', 1);
+    reorderElement(sample, 'name', ids(sample)[0]);
     renameElement(sample, 'name', 'other');
     fitPageToBackground(sample, 1, 1);
     expect(JSON.stringify(sample)).toBe(before);
@@ -154,16 +154,29 @@ describe('element operations', () => {
     expect(nudgeElement(sample, 'nope', 1, 1)).toBe(sample);
   });
 
-  it('reorder swaps with the neighbour, and stops at the ends', () => {
-    const [first, second] = ids(sample);
-    expect(ids(reorderElement(sample, first, 1)).slice(0, 2)).toEqual([
+  it("reorder puts an element in another's place, shifting the rest", () => {
+    const order = ids(sample);
+    const [first, second, third] = order;
+    expect(ids(reorderElement(sample, first, third)).slice(0, 3)).toEqual([
       second,
+      third,
       first,
     ]);
-    expect(reorderElement(sample, first, -1)).toBe(sample);
-    const last = ids(sample)[ids(sample).length - 1];
-    expect(reorderElement(sample, last, 1)).toBe(sample);
-    expect(reorderElement(sample, 'nope', 1)).toBe(sample);
+    expect(ids(reorderElement(sample, third, first)).slice(0, 3)).toEqual([
+      third,
+      first,
+      second,
+    ]);
+    expect(ids(reorderElement(sample, third, first))).toHaveLength(
+      order.length,
+    );
+  });
+
+  it('reorder changes nothing for unknown ids or the same place', () => {
+    const [first] = ids(sample);
+    expect(reorderElement(sample, first, first)).toBe(sample);
+    expect(reorderElement(sample, 'nope', first)).toBe(sample);
+    expect(reorderElement(sample, first, 'nope')).toBe(sample);
   });
 
   it('rename accepts a free valid id only', () => {

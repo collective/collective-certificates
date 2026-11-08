@@ -263,7 +263,7 @@ export default function Designer({
           elements={blueprint.elements}
           selection={state.selection}
           onSelect={(id) => dispatch({ type: 'select', id })}
-          onReorder={(id, step) => dispatch({ type: 'reorder', id, step })}
+          onReorder={(id, target) => dispatch({ type: 'reorder', id, target })}
         />
         <main className="certificate-designer-main">
           <Stage

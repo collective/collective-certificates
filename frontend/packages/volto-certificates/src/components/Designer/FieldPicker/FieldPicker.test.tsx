@@ -1,46 +1,51 @@
-import { fireEvent, screen } from '@testing-library/react';
-import { describe, expect, it, vi } from 'vitest';
-import { renderWith } from '../../../testing/render';
+import { beforeAll, describe, expect, it, vi } from 'vitest';
+import {
+  choose,
+  loadSelect,
+  openMenu,
+  renderWith,
+  selectInput,
+} from '../../../testing/render';
 import FieldPicker from './FieldPicker';
+import type { Term } from '../../../reducers/certificates';
 
-const FIELDS = [
-  { token: 'full_name', title: 'Full name' },
+vi.mock('@plone/volto/helpers/Loadable/Loadable');
+beforeAll(loadSelect);
+
+const FIELDS: Term[] = [
+  { token: 'full_name', title: 'Name' },
   { token: 'event_start_date', title: 'Start' },
 ];
 const KINDS = { full_name: 'text', event_start_date: 'date' };
 
 describe('FieldPicker', () => {
-  it('offers |date only for date fields', () => {
+  it('offers |date only for date fields', async () => {
     renderWith(
       <FieldPicker id="p" fields={FIELDS} kinds={KINDS} onInsert={vi.fn()} />,
     );
-    const options = screen.getAllByRole('option') as HTMLOptionElement[];
-    expect(options.map((o) => o.value)).toEqual([
-      '{{ full_name }}',
-      '{{ event_start_date }}',
-      '{{ event_start_date|date }}',
+    const options = await openMenu('Insert field');
+    expect(options.map((o) => o.textContent)).toEqual([
+      'Name',
+      'Start',
+      'Start (formatted date)',
     ]);
-    expect(options[2].textContent).toBe('Start (formatted date)');
   });
 
-  it('inserts the chosen placeholder', () => {
+  it('inserts the chosen placeholder, and again', async () => {
     const onInsert = vi.fn();
     renderWith(
       <FieldPicker id="p" fields={FIELDS} kinds={KINDS} onInsert={onInsert} />,
     );
-    fireEvent.change(screen.getByLabelText('Insert field'), {
-      target: { value: '{{ event_start_date|date }}' },
-    });
-    fireEvent.click(screen.getByText('Insert'));
+    await choose('Insert field', 'Start (formatted date)');
     expect(onInsert).toHaveBeenCalledWith('{{ event_start_date|date }}');
+    await choose('Insert field', 'Start (formatted date)');
+    expect(onInsert).toHaveBeenCalledTimes(2);
   });
 
   it('is disabled without fields', () => {
     renderWith(
       <FieldPicker id="p" fields={[]} kinds={{}} onInsert={vi.fn()} />,
     );
-    expect((screen.getByText('Insert') as HTMLButtonElement).disabled).toBe(
-      true,
-    );
+    expect(selectInput('Insert field').disabled).toBe(true);
   });
 });

@@ -34,3 +34,4 @@ type Story = StoryObj<typeof Toolbar>;
 export const Default: Story = {};
 export const NothingSelected: Story = { args: { hasSelection: false } };
 export const Applying: Story = { args: { applying: true } };
+export const SampleHidden: Story = { args: { showSample: false } };

@@ -69,6 +69,10 @@ class TestExampleTemplate:
         """The example template comes configured."""
         assert getattr(self.template, attr) == expected
 
+    def test_state(self):
+        """The example template is in the template workflow's only state."""
+        assert api.content.get_state(self.template) == "internal"
+
     def test_background(self):
         assert self.template.background.getImageSize() == (2338, 1652)
 

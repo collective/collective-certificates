@@ -191,21 +191,26 @@ export function nudgeElement(
 }
 
 /**
- * Move an element one step in document order (drawing order).
+ * Move an element to another element's place in document order (drawing
+ * order), shifting the ones in between, as a dragged list item lands.
  *
- * @param step `-1` towards the back, `1` towards the front.
+ * @param id The element to move.
+ * @param target The element whose place it takes.
+ * @returns The blueprint unchanged when either id is unknown or they are
+ *   the same.
  */
 export function reorderElement(
   blueprint: Blueprint,
   id: string,
-  step: -1 | 1,
+  target: string,
 ): Blueprint {
-  const index = blueprint.elements.findIndex((element) => element.id === id);
-  const target = index + step;
-  if (index === -1 || target < 0 || target >= blueprint.elements.length)
-    return blueprint;
+  const ids = blueprint.elements.map((element) => element.id);
+  const from = ids.indexOf(id);
+  const to = ids.indexOf(target);
+  if (from === -1 || to === -1 || from === to) return blueprint;
   const elements = [...blueprint.elements];
-  [elements[index], elements[target]] = [elements[target], elements[index]];
+  const [moved] = elements.splice(from, 1);
+  elements.splice(to, 0, moved);
   return { ...blueprint, elements };
 }
 

@@ -1,7 +1,10 @@
 import { fireEvent, screen } from '@testing-library/react';
-import { describe, expect, it, vi } from 'vitest';
-import { renderWith } from '../../../testing/render';
+import { beforeAll, describe, expect, it, vi } from 'vitest';
+import { choose, loadSelect, renderWith } from '../../../testing/render';
 import AnchorField from './AnchorField';
+
+vi.mock('@plone/volto/helpers/Loadable/Loadable');
+beforeAll(loadSelect);
 
 describe('AnchorField', () => {
   it('shows the current anchor and baseline', () => {
@@ -16,12 +19,10 @@ describe('AnchorField', () => {
     expect((screen.getByLabelText('Center') as HTMLInputElement).checked).toBe(
       true,
     );
-    expect(
-      (screen.getByLabelText('Vertical position') as HTMLSelectElement).value,
-    ).toBe('hanging');
+    expect(screen.getByText('Hanging')).toBeTruthy();
   });
 
-  it('reports the anchor and baseline separately', () => {
+  it('reports the anchor and baseline separately', async () => {
     const onChange = vi.fn();
     renderWith(
       <AnchorField
@@ -33,9 +34,7 @@ describe('AnchorField', () => {
     );
     fireEvent.click(screen.getByLabelText('End'));
     expect(onChange).toHaveBeenLastCalledWith({ anchor: 'end' });
-    fireEvent.change(screen.getByLabelText('Vertical position'), {
-      target: { value: 'alphabetic' },
-    });
+    await choose('Vertical position', 'On the baseline');
     expect(onChange).toHaveBeenLastCalledWith({ baseline: 'alphabetic' });
   });
 });

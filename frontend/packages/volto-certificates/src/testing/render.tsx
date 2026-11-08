@@ -1,8 +1,9 @@
-import { render } from '@testing-library/react';
+import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import type { ComponentType, ReactElement, ReactNode } from 'react';
 import { IntlProvider } from 'react-intl';
 import { Provider } from 'react-redux';
 import { MemoryRouter } from 'react-router-dom';
+import { expect } from 'vitest';
 import { initialState } from '../reducers/certificates';
 import type { CertificatesState, Term } from '../reducers/certificates';
 import { FIELD_KINDS } from './fixtures';
@@ -41,6 +42,45 @@ export const LOADED: CertificatesState = {
   vocabularies: { loading: false, loaded: true, error: null },
 };
 
+const INTL = { locale: 'en', messages: {} };
+
+/**
+ * Load the lazy libraries of Volto's widgets, react-select among them.
+ * A test file that renders a select also mocks the loader:
+ * `vi.mock('@plone/volto/helpers/Loadable/Loadable')`.
+ */
+export async function loadSelect(): Promise<void> {
+  const { __setLoadables } = (await import(
+    '@plone/volto/helpers/Loadable/Loadable'
+  )) as unknown as { __setLoadables: () => Promise<void> };
+  await __setLoadables();
+}
+
+/** The input of the select widget whose title is `label`. */
+export const selectInput = (label: string): HTMLInputElement =>
+  screen.getByLabelText(label, { selector: 'input' });
+
+/** Open the menu of a select widget and return its options. */
+export async function openMenu(label: string): Promise<HTMLElement[]> {
+  const input = selectInput(label);
+  input.focus();
+  fireEvent.keyDown(input, { key: 'ArrowDown', keyCode: 40 });
+  await waitFor(() =>
+    expect(document.querySelector('.react-select__option')).not.toBeNull(),
+  );
+  return Array.from(
+    document.querySelectorAll<HTMLElement>('.react-select__option'),
+  );
+}
+
+/** Choose the option labelled `option` in a select widget. */
+export async function choose(label: string, option: string): Promise<void> {
+  const options = await openMenu(label);
+  const target = options.find((element) => element.textContent === option);
+  if (!target) throw new Error(`No option "${option}" in "${label}"`);
+  fireEvent.click(target);
+}
+
 export interface FakeStore {
   getState: () => Record<string, unknown>;
   subscribe: () => () => void;
@@ -57,8 +97,10 @@ export function fakeStore(
   answer: (action: { type: string }) => unknown = () => undefined,
 ): FakeStore {
   const actions: { type: string }[] = [];
+  // Volto's widgets read the locale from the store.
+  const full = { intl: INTL, ...state };
   return {
-    getState: () => state,
+    getState: () => full,
     subscribe: () => () => {},
     dispatch: (action) => {
       actions.push(action);
