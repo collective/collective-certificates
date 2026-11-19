@@ -1,1 +1,0 @@
-Added a single-state workflow for each content type: anyone with a certificate's address can view it, while search, navigation and listings show certificates to Managers only; certificate templates and their images are visible only to the people who manage them. @ericof

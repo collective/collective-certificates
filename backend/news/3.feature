@@ -1,1 +1,0 @@
-Stored the SHA-256 of each certificate's file when it is issued, in the new read-only `file_hash` field. The REST API gives it with the certificate, and `@certificate-verification` gives it as `file.sha256`; certificates issued before this change get the hash of their current file. @ericof

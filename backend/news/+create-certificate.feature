@@ -1,1 +1,0 @@
-Added `create_certificate()` to render a certificate as PDF or PNG and store it at a Plone path, and the `@preview`, `@render`, `@validate-blueprint` and `@create-certificate` REST API services. @ericof

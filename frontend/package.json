@@ -1,8 +1,8 @@
 {
   "name": "@plone-collective/volto-certificates-dev",
-  "version": "1.0.0-alpha.0",
+  "version": "1.0.0-alpha.1",
   "description": "Generate and store participation certificates for events.",
-  "author": "Érico Andrei",
+  "author": "\u00c9rico Andrei",
   "homepage": "https://github.com/collective/collective-certificates",
   "license": "MIT",
   "keywords": [

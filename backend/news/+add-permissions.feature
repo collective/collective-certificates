@@ -1,1 +1,0 @@
-Added the permissions `collective.certificates: Add CertificateTemplate` and `collective.certificates: Add Certificate`. No role has them after installing the add-on; the example content profile grants them to Manager. @ericof

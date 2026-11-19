@@ -1,1 +1,0 @@
-Added a view for certificate templates: it draws the certificate with the template's sample data and lists the images inside the template. In the designer, an image element now shows the background or any Image item inside the template, such as a signature or a logo. @ericof

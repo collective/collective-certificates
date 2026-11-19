@@ -1,6 +1,6 @@
 {
   "name": "@plone-collective/volto-certificates",
-  "version": "1.0.0-alpha.0",
+  "version": "1.0.0-alpha.1",
   "description": "Generate and store participation certificates for events.",
   "main": "src/index.ts",
   "license": "MIT",
