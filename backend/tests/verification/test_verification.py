@@ -1,7 +1,9 @@
 from . import DATA
 from . import FOLDER
 from collective.certificates.api import create_certificate
+from collective.certificates.utils.verification import file_hash
 from collective.certificates.utils.verification import find_certificate
+from collective.certificates.utils.verification import sha256
 from collective.certificates.utils.verification import site_url
 from collective.certificates.utils.verification import summary
 from collective.certificates.utils.verification import verification_url
@@ -71,7 +73,30 @@ class TestFindCertificate:
             "filename": "template-patrick-stewart.pdf",
             "content-type": "application/pdf",
             "size": self.certificate.file.getSize(),
+            "sha256": self.certificate.file_hash,
         }
+
+    def test_file_hash_stored(self):
+        """The hash stored at issue wins over the current file's."""
+        self.certificate.file_hash = "f" * 64
+        assert file_hash(self.certificate) == "f" * 64
+        assert summary(self.certificate)["file"]["sha256"] == "f" * 64
+
+    def test_file_hash_computed(self):
+        """A certificate issued before hashes were stored gets its file's."""
+        expected = self.certificate.file_hash
+        self.certificate.file_hash = None
+        assert file_hash(self.certificate) == expected
+        assert expected == sha256(self.certificate.file.data)
+
+    def test_file_hash_without_file(self):
+        bare = api.content.create(container=self.portal, type="Certificate", id="bare")
+        assert file_hash(bare) is None
+
+    def test_sha256(self):
+        assert sha256(b"abc") == (
+            "ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad"
+        )
 
     def test_verification_url(self):
         """The site's verification page, served by the frontend."""

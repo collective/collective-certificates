@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Plone\n"
-"POT-Creation-Date: 2026-11-04T01:59:46.471Z\n"
+"POT-Creation-Date: 2026-11-19T18:13:14.194Z\n"
 "Last-Translator: Plone i18n <plone-i18n@lists.sourceforge.net>\n"
 "Language-Team: Plone i18n <plone-i18n@lists.sourceforge.net>\n"
 "Content-Type: text/plain; charset=utf-8\n"
@@ -113,9 +113,29 @@ msgstr ""
 msgid "certificates.cancel"
 msgstr ""
 
+#. Default: "{type} file, {size}"
+#: messages
+msgid "certificates.certificateFileDetails"
+msgstr ""
+
+#. Default: "The file of this certificate is not available."
+#: messages
+msgid "certificates.certificateFileMissing"
+msgstr ""
+
+#. Default: "Details"
+#: messages
+msgid "certificates.certificateValues"
+msgstr ""
+
 #. Default: "{count, plural, one {# certificate was created.} other {# certificates were created.}}"
 #: messages
 msgid "certificates.certificatesCreated"
+msgstr ""
+
+#. Default: "Check that this certificate is valid"
+#: messages
+msgid "certificates.checkCertificate"
 msgstr ""
 
 #. Default: "Color"
@@ -176,6 +196,11 @@ msgstr ""
 #. Default: "Certificate designer"
 #: messages
 msgid "certificates.designer"
+msgstr ""
+
+#. Default: "Download certificate"
+#: messages
+msgid "certificates.downloadCertificate"
 msgstr ""
 
 #. Default: "Download CSV template"
@@ -256,6 +281,26 @@ msgstr ""
 #. Default: "{element}: unknown field {token}."
 #: messages
 msgid "certificates.error_unknown_token"
+msgstr ""
+
+#. Default: "Copied"
+#: messages
+msgid "certificates.fingerprintCopied"
+msgstr ""
+
+#. Default: "Copy"
+#: messages
+msgid "certificates.fingerprintCopy"
+msgstr ""
+
+#. Default: "Compare it with the SHA-256 of your file: if they match, the file has not been changed since it was issued."
+#: messages
+msgid "certificates.fingerprintHelp"
+msgstr ""
+
+#. Default: "File fingerprint (SHA-256)"
+#: messages
+msgid "certificates.fingerprintTitle"
 msgstr ""
 
 #. Default: "Fit template to background"
@@ -471,11 +516,6 @@ msgstr ""
 #. Default: "Checking the certificate…"
 #: messages
 msgid "certificates.verifyChecking"
-msgstr ""
-
-#. Default: "Download the certificate (PDF)"
-#: messages
-msgid "certificates.verifyDownload"
 msgstr ""
 
 #. Default: "Issued on {date}"

@@ -1,4 +1,5 @@
 import type { ConfigType } from '@plone/registry';
+import installIcons from './config/icons';
 import installReducers from './config/reducers';
 import installRoutes from './config/routes';
 import installSettings from './config/settings';
@@ -7,6 +8,7 @@ import installWidgets from './config/widgets';
 
 function applyConfig(config: ConfigType) {
   installSettings(config);
+  installIcons(config);
   installReducers(config);
   installWidgets(config);
   installViews(config);

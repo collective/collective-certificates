@@ -40,6 +40,8 @@ export interface CertificateVerification {
     filename: string;
     'content-type': string;
     size: number;
+    /** SHA-256 of the file, as 64 hexadecimal characters. */
+    sha256?: string | null;
   } | null;
 }
 

@@ -2,6 +2,7 @@ import { describe, expect, it } from 'vitest';
 import type { ConfigType } from '@plone/registry';
 import applyConfig from '../index';
 import certificates from '../reducers/certificates';
+import installIcons, { CONTENT_ICONS } from './icons';
 import installReducers from './reducers';
 import installRoutes, { VERIFY_ROUTE } from './routes';
 import installSettings, { DEFAULT_DESIGNER } from './settings';
@@ -92,7 +93,7 @@ describe('routes', () => {
 });
 
 describe('views', () => {
-  it('registers the template view and keeps the others', () => {
+  it('registers the certificate and template views and keeps the others', () => {
     const config = emptyConfig();
     const Event = () => null;
     config.views.contentTypesViews = { Event };
@@ -101,7 +102,37 @@ describe('views', () => {
       Event,
       ...CONTENT_TYPE_VIEWS,
     });
-    expect(Object.keys(CONTENT_TYPE_VIEWS)).toEqual(['CertificateTemplate']);
+    expect(Object.keys(CONTENT_TYPE_VIEWS)).toEqual([
+      'Certificate',
+      'CertificateTemplate',
+    ]);
+  });
+});
+
+describe('icons', () => {
+  it('registers an icon for both content types and keeps the others', () => {
+    const config = emptyConfig();
+    config.settings.contentIcons = { Document: 'page.svg' };
+    installIcons(config);
+    expect(config.settings.contentIcons).toEqual({
+      Document: 'page.svg',
+      ...CONTENT_ICONS,
+    });
+    expect(Object.keys(CONTENT_ICONS)).toEqual([
+      'Certificate',
+      'CertificateTemplate',
+    ]);
+    expect(CONTENT_ICONS.Certificate).toBeTruthy();
+    expect(CONTENT_ICONS.CertificateTemplate).toBeTruthy();
+    expect(CONTENT_ICONS.Certificate).not.toEqual(
+      CONTENT_ICONS.CertificateTemplate,
+    );
+  });
+
+  it('works without existing content icons', () => {
+    const config = emptyConfig();
+    installIcons(config);
+    expect(config.settings.contentIcons).toEqual(CONTENT_ICONS);
   });
 });
 
@@ -111,6 +142,7 @@ describe('applyConfig', () => {
     (config as unknown as { widgets: unknown }).widgets = { widget: {} };
     applyConfig(config);
     expect(designer(config)).toEqual(DEFAULT_DESIGNER);
+    expect(config.settings.contentIcons).toEqual(CONTENT_ICONS);
     expect(config.addonReducers?.certificates).toBe(certificates);
     expect(config.widgets.widget).toEqual(WIDGETS);
     expect(config.views.contentTypesViews).toEqual(CONTENT_TYPE_VIEWS);

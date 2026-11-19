@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2026-11-03 21:04+0000\n"
+"POT-Creation-Date: 2026-11-19 17:54+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -242,13 +242,18 @@ msgid "help_blueprint"
 msgstr ""
 
 #. Default: "Field values the certificate was rendered with."
-#: collective/certificates/content/certificate.py:41
+#: collective/certificates/content/certificate.py:42
 msgid "help_certificate_data"
 msgstr ""
 
 #. Default: "The certificate as it was issued, PDF or PNG."
-#: collective/certificates/content/certificate.py:32
+#: collective/certificates/content/certificate.py:33
 msgid "help_certificate_file"
+msgstr ""
+
+#. Default: "Fingerprint of the file as it was issued."
+#: collective/certificates/content/certificate.py:64
+msgid "help_certificate_file_hash"
 msgstr ""
 
 #. Default: "How the date filter writes dates."
@@ -272,7 +277,7 @@ msgid "help_sample_data"
 msgstr ""
 
 #. Default: "UID of the certificate template it was rendered from."
-#: collective/certificates/content/certificate.py:53
+#: collective/certificates/content/certificate.py:54
 msgid "help_template_uid"
 msgstr ""
 
@@ -287,13 +292,18 @@ msgid "label_blueprint"
 msgstr ""
 
 #. Default: "Values"
-#: collective/certificates/content/certificate.py:40
+#: collective/certificates/content/certificate.py:41
 msgid "label_certificate_data"
 msgstr ""
 
 #. Default: "File"
-#: collective/certificates/content/certificate.py:31
+#: collective/certificates/content/certificate.py:32
 msgid "label_certificate_file"
+msgstr ""
+
+#. Default: "SHA-256"
+#: collective/certificates/content/certificate.py:63
+msgid "label_certificate_file_hash"
 msgstr ""
 
 #. Default: "Date format"
@@ -317,7 +327,7 @@ msgid "label_sample_data"
 msgstr ""
 
 #. Default: "Template"
-#: collective/certificates/content/certificate.py:52
+#: collective/certificates/content/certificate.py:53
 msgid "label_template_uid"
 msgstr ""
 

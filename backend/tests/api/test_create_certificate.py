@@ -9,6 +9,7 @@ from plone import api
 from plone.app.testing import setRoles
 from plone.app.testing import TEST_USER_ID
 
+import hashlib
 import pytest
 
 
@@ -54,6 +55,11 @@ class TestCreateCertificate:
         assert item.title == "Star Trek: Picard — Patrick Stewart"
         assert item.data == DATA
         assert item.template_uid == api.content.get_uuid(self.template)
+
+    def test_file_hash(self):
+        """The SHA-256 of the file as issued is stored with it."""
+        item = certificates.create_certificate(self.template, DATA, "/certificates")
+        assert item.file_hash == hashlib.sha256(item.file.data).hexdigest()
 
     def test_pdf(self):
         item = certificates.create_certificate(self.template, DATA, "/certificates")

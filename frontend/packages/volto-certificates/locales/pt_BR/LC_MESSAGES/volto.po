@@ -116,10 +116,30 @@ msgstr "Centralizado"
 msgid "certificates.cancel"
 msgstr "Cancelar"
 
+#. Default: "{type} file, {size}"
+#: messages
+msgid "certificates.certificateFileDetails"
+msgstr "Arquivo {type}, {size}"
+
+#. Default: "The file of this certificate is not available."
+#: messages
+msgid "certificates.certificateFileMissing"
+msgstr "O arquivo deste certificado não está disponível."
+
+#. Default: "Details"
+#: messages
+msgid "certificates.certificateValues"
+msgstr "Detalhes"
+
 #. Default: "{count, plural, one {# certificate was created.} other {# certificates were created.}}"
 #: messages
 msgid "certificates.certificatesCreated"
 msgstr "{count, plural, one {# certificado foi criado.} other {# certificados foram criados.}}"
+
+#. Default: "Check that this certificate is valid"
+#: messages
+msgid "certificates.checkCertificate"
+msgstr "Verifique se este certificado é válido"
 
 #. Default: "Color"
 #: messages
@@ -180,6 +200,11 @@ msgstr "Excluir"
 #: messages
 msgid "certificates.designer"
 msgstr "Editor de certificados"
+
+#. Default: "Download certificate"
+#: messages
+msgid "certificates.downloadCertificate"
+msgstr "Baixar certificado"
 
 #. Default: "Download CSV template"
 #: messages
@@ -260,6 +285,26 @@ msgstr "{element}: fonte desconhecida {font}."
 #: messages
 msgid "certificates.error_unknown_token"
 msgstr "{element}: campo desconhecido {token}."
+
+#. Default: "Copied"
+#: messages
+msgid "certificates.fingerprintCopied"
+msgstr "Copiado"
+
+#. Default: "Copy"
+#: messages
+msgid "certificates.fingerprintCopy"
+msgstr "Copiar"
+
+#. Default: "Compare it with the SHA-256 of your file: if they match, the file has not been changed since it was issued."
+#: messages
+msgid "certificates.fingerprintHelp"
+msgstr "Compare-a com o SHA-256 do seu arquivo: se forem iguais, o arquivo não foi alterado desde a emissão."
+
+#. Default: "File fingerprint (SHA-256)"
+#: messages
+msgid "certificates.fingerprintTitle"
+msgstr "Impressão digital do arquivo (SHA-256)"
 
 #. Default: "Fit template to background"
 #: messages
@@ -475,11 +520,6 @@ msgstr "Envie uma imagem de fundo primeiro."
 #: messages
 msgid "certificates.verifyChecking"
 msgstr "Verificando o certificado…"
-
-#. Default: "Download the certificate (PDF)"
-#: messages
-msgid "certificates.verifyDownload"
-msgstr "Baixar o certificado (PDF)"
 
 #. Default: "Issued on {date}"
 #: messages

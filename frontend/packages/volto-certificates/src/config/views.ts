@@ -1,10 +1,12 @@
 import type { ComponentType } from 'react';
 import type { ConfigType } from '@plone/registry';
 import CertificateTemplateView from '../components/CertificateTemplateView/CertificateTemplateView';
+import CertificateView from '../components/CertificateView/CertificateView';
 
 /** Views by the portal type the backend registers. */
 export const CONTENT_TYPE_VIEWS = {
   // Volto passes the content as a prop; its registry types views as props-less.
+  Certificate: CertificateView as ComponentType,
   CertificateTemplate: CertificateTemplateView as ComponentType,
 };
 

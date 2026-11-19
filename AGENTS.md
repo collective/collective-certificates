@@ -37,6 +37,7 @@ Backend (Plone):
 
 - Portal types: `CertificateTemplate` and `Certificate`.
 - Content schemas: `ICertificateTemplate` and `ICertificate`.
+- Certificate field `file_hash`, the SHA-256 of the file as issued, which `@certificate-verification` also gives as `file.sha256` (`collective/certificates/utils/verification.py`).
 - Blueprint widgets named in the schema: `certificate_blueprint` and `certificate_sample_data`.
 - REST services on a template: `@preview`, `@render`, `@validate-blueprint`, `@create-certificate`, `@certificates-csv`, `@create-certificates`.
 - CSV column `parent_container` (`collective/certificates/api/batch.py`); the other columns are the field tokens.

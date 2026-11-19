@@ -5,20 +5,15 @@ import { Container as SemanticContainer } from 'semantic-ui-react';
 import config from '@plone/volto/registry';
 import { getCertificateVerification } from '../../actions/certificates';
 import messages from '../../messages';
+import CertificateCard from '../CertificateCard/CertificateCard';
+import CertificateFingerprint from '../CertificateFingerprint/CertificateFingerprint';
+import CertificateValues from '../CertificateValues/CertificateValues';
 import type { ComponentType, ReactNode } from 'react';
 import type { CertificatesState } from '../../reducers/certificates';
-
-import './VerifyCertificate.scss';
 
 export interface VerifyCertificateProps {
   match: { params: { uid: string } };
 }
-
-const DATE_OPTIONS = {
-  year: 'numeric',
-  month: 'long',
-  day: 'numeric',
-} as const;
 
 /**
  * The page the QR code of a certificate opens: whether the certificate
@@ -67,37 +62,14 @@ export default function VerifyCertificate({ match }: VerifyCertificateProps) {
         {intl.formatMessage(messages.verifyValid)}
       </h1>
       <h2>{result.title}</h2>
-      <p className="verify-issued">
-        {intl.formatMessage(messages.verifyIssued, {
-          date: intl.formatDate(result.issued, DATE_OPTIONS),
-        })}
-      </p>
-      <dl className="verify-fields">
-        {result.fields
-          .filter((field) => field.kind !== 'computed')
-          .map((field) => (
-            <div key={field.token}>
-              <dt>{field.title}</dt>
-              <dd>
-                {field.kind === 'date'
-                  ? intl.formatDate(field.value, {
-                      ...DATE_OPTIONS,
-                      timeZone: 'UTC',
-                    })
-                  : field.value}
-              </dd>
-            </div>
-          ))}
-      </dl>
-      {result.file && (
-        <p>
-          <a
-            className="ui button"
-            href={`/++api++/@@certificate-file/${result.uid}`}
-          >
-            {intl.formatMessage(messages.verifyDownload)}
-          </a>
-        </p>
+      <CertificateCard
+        issued={result.issued}
+        file={result.file}
+        downloadUrl={`/++api++/@@certificate-file/${result.uid}`}
+      />
+      <CertificateValues values={result.fields} />
+      {result.file?.sha256 && (
+        <CertificateFingerprint hash={result.file.sha256} />
       )}
     </Container>
   );
