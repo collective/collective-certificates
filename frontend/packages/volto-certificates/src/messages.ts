@@ -257,10 +257,6 @@ const messages = defineMessages({
     id: 'certificates.verifyNotFound',
     defaultMessage: 'No certificate with this ID was found.',
   },
-  verifyDownload: {
-    id: 'certificates.verifyDownload',
-    defaultMessage: 'Download the certificate (PDF)',
-  },
   verifyTitle: {
     id: 'certificates.verifyTitle',
     defaultMessage: 'Certificate verification',
@@ -301,6 +297,43 @@ const messages = defineMessages({
   csvErrorLine: {
     id: 'certificates.csvErrorLine',
     defaultMessage: 'Line {row}: {message}',
+  },
+  downloadCertificate: {
+    id: 'certificates.downloadCertificate',
+    defaultMessage: 'Download certificate',
+  },
+  certificateFileDetails: {
+    id: 'certificates.certificateFileDetails',
+    defaultMessage: '{type} file, {size}',
+  },
+  certificateFileMissing: {
+    id: 'certificates.certificateFileMissing',
+    defaultMessage: 'The file of this certificate is not available.',
+  },
+  certificateValues: {
+    id: 'certificates.certificateValues',
+    defaultMessage: 'Details',
+  },
+  checkCertificate: {
+    id: 'certificates.checkCertificate',
+    defaultMessage: 'Check that this certificate is valid',
+  },
+  fingerprintTitle: {
+    id: 'certificates.fingerprintTitle',
+    defaultMessage: 'File fingerprint (SHA-256)',
+  },
+  fingerprintHelp: {
+    id: 'certificates.fingerprintHelp',
+    defaultMessage:
+      'Compare it with the SHA-256 of your file: if they match, the file has not been changed since it was issued.',
+  },
+  fingerprintCopy: {
+    id: 'certificates.fingerprintCopy',
+    defaultMessage: 'Copy',
+  },
+  fingerprintCopied: {
+    id: 'certificates.fingerprintCopied',
+    defaultMessage: 'Copied',
   },
 });
 

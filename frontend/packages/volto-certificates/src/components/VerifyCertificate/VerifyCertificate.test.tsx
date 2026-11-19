@@ -6,6 +6,7 @@ import type { CertificateVerification } from '../../reducers/certificates';
 import VerifyCertificate from './VerifyCertificate';
 
 const UID = '257e08fdcd07ff6fa3d1bc14f6aec321';
+const HASH = 'ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad';
 
 const CERTIFICATE: CertificateVerification = {
   uid: UID,
@@ -38,6 +39,7 @@ const CERTIFICATE: CertificateVerification = {
     filename: 'certificate.pdf',
     'content-type': 'application/pdf',
     size: 123,
+    sha256: HASH,
   },
 };
 
@@ -78,9 +80,12 @@ describe('VerifyCertificate', () => {
     expect(screen.getByRole('heading', { level: 1 }).textContent).toBe(
       'This certificate is valid',
     );
-    expect(screen.getByRole('heading', { level: 2 }).textContent).toBe(
-      'Star Trek: Picard — Patrick Stewart',
-    );
+    expect(
+      screen.getByRole('heading', {
+        level: 2,
+        name: 'Star Trek: Picard — Patrick Stewart',
+      }),
+    ).toBeTruthy();
     expect(screen.getByText('Issued on October 30, 2026')).toBeTruthy();
     expect(screen.getByText('Full name')).toBeTruthy();
     expect(screen.getByText('Patrick Stewart')).toBeTruthy();
@@ -93,15 +98,39 @@ describe('VerifyCertificate', () => {
     expect(screen.queryByText('Verification URL')).toBeNull();
   });
 
-  it('links to the PDF through the API', () => {
+  it('links to the file through the API, with its type and size', () => {
     const store = storeWith({ loaded: true, result: CERTIFICATE });
     renderWith(<VerifyCertificate match={match} />, store);
-    const link = screen.getByRole('link', {
-      name: 'Download the certificate (PDF)',
-    });
+    const link = screen.getByRole('link', { name: 'Download certificate' });
     expect(link.getAttribute('href')).toBe(
       `/++api++/@@certificate-file/${UID}`,
     );
+    expect(screen.getByText('PDF file, 123 byte')).toBeTruthy();
+  });
+
+  it('shows the values in a table', () => {
+    const store = storeWith({ loaded: true, result: CERTIFICATE });
+    renderWith(<VerifyCertificate match={match} />, store);
+    expect(
+      screen.getAllByRole('rowheader').map((cell) => cell.textContent),
+    ).toEqual(['Full name', 'Event start date']);
+  });
+
+  it('shows the fingerprint of the file', () => {
+    const store = storeWith({ loaded: true, result: CERTIFICATE });
+    renderWith(<VerifyCertificate match={match} />, store);
+    expect(screen.getByText(HASH)).toBeTruthy();
+  });
+
+  it('shows no fingerprint when the server gives none', () => {
+    const store = storeWith({
+      loaded: true,
+      result: { ...CERTIFICATE, file: { ...CERTIFICATE.file!, sha256: null } },
+    });
+    renderWith(<VerifyCertificate match={match} />, store);
+    expect(
+      screen.queryByRole('heading', { name: 'File fingerprint (SHA-256)' }),
+    ).toBeNull();
   });
 
   it('offers no download when the certificate has no file', () => {

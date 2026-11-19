@@ -1,0 +1,23 @@
+.certificate-fingerprint {
+  margin: 2rem 0;
+
+  .certificate-fingerprint-help {
+    color: #5c6370;
+  }
+
+  .certificate-fingerprint-value {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.75rem;
+
+    code {
+      padding: 0.5rem 0.75rem;
+      border-radius: 4px;
+      background: #f3f5f7;
+      font-size: 0.95em;
+      /* 64 characters without a break would overflow a phone. */
+      overflow-wrap: anywhere;
+    }
+  }
+}
