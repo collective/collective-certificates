@@ -12,6 +12,7 @@ from typing import Any
 from zope.globalrequest import getRequest
 from zope.i18n import translate
 
+import hashlib
 import os
 import re
 
@@ -65,13 +66,39 @@ def download_url(uid: str) -> str:
     return f"{api.portal.get().absolute_url()}/@@certificate-file/{uid}"
 
 
+def sha256(data: bytes) -> str:
+    """Return the SHA-256 of some bytes.
+
+    :param data: File contents.
+    :returns: The digest, as 64 lowercase hexadecimal characters.
+    """
+    return hashlib.sha256(data).hexdigest()
+
+
+def file_hash(certificate: Certificate) -> str | None:
+    """Return the SHA-256 of a certificate's file.
+
+    :param certificate: A certificate.
+    :returns: The hash stored when it was issued; for a certificate issued
+        before hashes were stored, the hash of its current file; ``None``
+        without a file.
+    """
+    if certificate.file_hash:
+        return certificate.file_hash
+    file = certificate.file
+    if file is None:
+        return None
+    with file.open() as blob:
+        return hashlib.file_digest(blob, "sha256").hexdigest()
+
+
 def summary(certificate: Certificate) -> dict[str, Any]:
     """Describe a certificate for public verification.
 
     :param certificate: An issued certificate.
     :returns: Its UID, title, issue date, field values (as ``data``, and as
         ``fields`` with each field's translated title and kind), template
-        and file.
+        and file, with the file's SHA-256.
     """
     data = dict(certificate.data or {})
     request = getRequest()
@@ -104,5 +131,6 @@ def summary(certificate: Certificate) -> dict[str, Any]:
             "filename": file.filename,
             "content-type": file.contentType,
             "size": file.getSize(),
+            "sha256": file_hash(certificate),
         },
     }

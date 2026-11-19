@@ -44,9 +44,10 @@ class TestSchema:
             "file",
             "data",
             "template_uid",
+            "file_hash",
         ]
 
-    @pytest.mark.parametrize("name", ["data", "template_uid"])
+    @pytest.mark.parametrize("name", ["data", "template_uid", "file_hash"])
     def test_readonly(self, name: str):
         """Values and template are a record of how it was issued."""
         assert ICertificate[name].readonly is True

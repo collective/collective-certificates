@@ -1,7 +1,8 @@
 """The Certificate content type.
 
 An issued certificate: the rendered file, the field values it was rendered
-with, and the UID of the template it came from. Its own UID is printed on
+with, the UID of the template it came from, and the SHA-256 of the file as
+it was issued. Its own UID is printed on
 the certificate (as ``{{ certificate_uid }}`` or inside
 ``{{ verification_url }}``), which is how anyone holding it can verify it.
 """
@@ -53,6 +54,16 @@ class ICertificate(model.Schema):
         description=_(
             "help_template_uid",
             default="UID of the certificate template it was rendered from.",
+        ),
+        required=False,
+        readonly=True,
+    )
+
+    file_hash = schema.ASCIILine(
+        title=_("label_certificate_file_hash", default="SHA-256"),
+        description=_(
+            "help_certificate_file_hash",
+            default="Fingerprint of the file as it was issued.",
         ),
         required=False,
         readonly=True,

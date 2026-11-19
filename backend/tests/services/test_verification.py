@@ -31,6 +31,7 @@ class TestVerificationService:
         assert body["data"]["full_name"] == "Patrick Stewart"
         assert body["template"]["title"] == "Template"
         assert body["file"]["download"].endswith(f"/@@certificate-file/{self.uid}")
+        assert body["file"]["sha256"] == self.certificate.file_hash
 
     @pytest.mark.parametrize("uid", ["0" * 32, "nope"])
     def test_not_found(self, uid: str):
@@ -43,6 +44,30 @@ class TestVerificationService:
         assert (
             self.anon.get(f"@certificate-verification/{self.uid}/x").status_code == 404
         )
+
+
+class TestCertificateSerialization:
+    @pytest.fixture(autouse=True)
+    def _setup(self, portal, certificate, request_factory):
+        self.certificate = certificate
+        self.path = f"certificates/{certificate.getId()}"
+        self.anon = request_factory(role="Anonymous")
+
+    def test_file_hash(self):
+        """Anyone viewing the certificate gets its hash and values."""
+        response = self.anon.get(self.path)
+        assert response.status_code == 200
+        body = response.json()
+        assert body["file_hash"] == self.certificate.file_hash
+        assert len(body["file_hash"]) == 64
+        assert body["data"]["full_name"] == "Patrick Stewart"
+
+    def test_file_hash_computed(self):
+        """A certificate issued before hashes were stored gets its file's."""
+        expected = self.certificate.file_hash
+        self.certificate.file_hash = None
+        transaction.commit()
+        assert self.anon.get(self.path).json()["file_hash"] == expected
 
 
 class TestCertificateFile:

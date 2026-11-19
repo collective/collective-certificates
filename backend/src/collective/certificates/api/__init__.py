@@ -18,6 +18,7 @@ permissions; committing the transaction is the caller's business.
 from collective.certificates.blueprint.fields import MissingFields
 from collective.certificates.content.certificate import Certificate
 from collective.certificates.content.template import CertificateTemplate
+from collective.certificates.utils.verification import sha256
 from plone import api
 from plone.dexterity.content import DexterityContent
 from plone.i18n.normalizer.interfaces import IIDNormalizer
@@ -158,10 +159,12 @@ def create_certificate(
         template_uid=api.content.get_uuid(template),
     )
     values = {**data, **template.computed_values(api.content.get_uuid(certificate))}
+    contents = template.render(values, format)
     certificate.file = NamedBlobFile(
-        data=template.render(values, format),
+        data=contents,
         filename=filename,
         contentType=CONTENT_TYPES[format],
     )
+    certificate.file_hash = sha256(contents)
     modified(certificate)
     return certificate
